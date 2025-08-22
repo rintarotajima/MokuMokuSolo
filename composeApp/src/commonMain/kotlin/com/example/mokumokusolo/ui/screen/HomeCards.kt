@@ -29,17 +29,18 @@ fun HomeCards(modifier: Modifier = Modifier) {
         ) {
             Text(
                 text = "今月の収支",
-                style = MaterialTheme.typography.bodySmall
+                style = MaterialTheme.typography.labelMedium,
             )
-            Spacer(modifier = Modifier.size(10.dp))
+            Spacer(modifier = Modifier.size(8.dp))
             Text(
                 text = "¥1,000",
                 fontSize = 32.sp,
                 textAlign = TextAlign.Center,
                 style = MaterialTheme.typography.titleLarge
             )
-            Spacer(modifier = Modifier.size(10.dp))
+            Spacer(modifier = Modifier.size(8.dp))
             Text(text = "あと300円でNetflixをカバー")
+            Spacer(modifier = Modifier.size(4.dp))
             LinearProgressIndicator()
         }
     }
