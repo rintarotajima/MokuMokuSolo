@@ -1,4 +1,4 @@
-package com.example.ui.theme
+package com.example.mokumokusolo.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
@@ -34,6 +34,18 @@ val Lato
 
 val Typography: Typography
     @Composable get() = Typography(
+        titleLarge = TextStyle(
+            fontFamily = MontSerrat,
+            fontWeight = FontWeight.Bold,
+            fontSize = 32.sp,
+            lineHeight = 36.sp
+        ),
+        titleSmall = TextStyle(
+            fontFamily = MontSerrat,
+            fontWeight = FontWeight.Medium,
+            fontSize = 17.sp,
+            lineHeight = 24.sp
+        ),
         bodyLarge = TextStyle(
             fontFamily = Lato,
             fontWeight = FontWeight.Normal,
@@ -47,21 +59,8 @@ val Typography: Typography
             lineHeight = 20.sp
         ),
         bodySmall = TextStyle(
-            fontFamily = Lato,
             fontWeight = FontWeight.Normal,
             fontSize = 15.sp,
             lineHeight = 20.sp
         ),
-        titleLarge = TextStyle(
-            fontFamily = MontSerrat,
-            fontWeight = FontWeight.Bold,
-            fontSize = 32.sp,
-            lineHeight = 36.sp
-        ),
-        titleSmall = TextStyle(
-            fontFamily = MontSerrat,
-            fontWeight = FontWeight.Medium,
-            fontSize = 17.sp,
-            lineHeight = 24.sp
-        )
     )
