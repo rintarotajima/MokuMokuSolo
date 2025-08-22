@@ -1,7 +1,9 @@
 package com.example.mokumokusolo.ui.screen
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.LinearProgressIndicator
@@ -27,12 +29,16 @@ fun HomeCards(modifier: Modifier = Modifier) {
         ) {
             Text(
                 text = "今月の収支",
+                style = MaterialTheme.typography.bodySmall
             )
+            Spacer(modifier = Modifier.size(10.dp))
             Text(
                 text = "¥1,000",
                 fontSize = 32.sp,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                style = MaterialTheme.typography.titleLarge
             )
+            Spacer(modifier = Modifier.size(10.dp))
             Text(text = "あと300円でNetflixをカバー")
             LinearProgressIndicator()
         }
