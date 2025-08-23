@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 
 val LightColorTheme = lightColorScheme(
     primary = Primary,
+    secondary = Secondary,
     surface = Surface,
     surfaceContainerLowest = SurfaceLowest,
     background = Background,
