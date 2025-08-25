@@ -26,7 +26,10 @@ fun HomeScreen(modifier: Modifier = Modifier) {
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background),
         floatingActionButton = {
-            FloatingActionButton(onClick = {}) {
+            FloatingActionButton(
+                onClick = {},
+                containerColor = MaterialTheme.colorScheme.primaryContainer
+            ) {
                 Icon(Icons.Default.Add, "")
             }
         }
