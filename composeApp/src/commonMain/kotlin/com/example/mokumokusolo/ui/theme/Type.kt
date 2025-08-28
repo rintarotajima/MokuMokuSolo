@@ -59,6 +59,7 @@ val Typography: Typography
             lineHeight = 20.sp
         ),
         bodySmall = TextStyle(
+            fontFamily = Lato,
             fontWeight = FontWeight.Normal,
             fontSize = 15.sp,
             lineHeight = 20.sp
