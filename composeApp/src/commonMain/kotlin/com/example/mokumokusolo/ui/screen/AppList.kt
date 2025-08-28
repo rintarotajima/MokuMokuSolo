@@ -1,21 +1,25 @@
 package com.example.mokumokusolo.ui.screen
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.mokumokusolo.model.App
 import com.example.mokumokusolo.ui.theme.MokuMokuSoloTheme
 import mokumokusolo.composeapp.generated.resources.Res
@@ -67,24 +71,42 @@ private fun AppListPreview() {
 
 @Composable
 fun AppListItem(app: App, modifier: Modifier = Modifier) {
-    Row(
+    ElevatedCard(
         modifier = modifier
-            .fillMaxWidth()
-            .padding(vertical = 8.dp)
-            .background(MaterialTheme.colorScheme.background),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceAround,
-    ) {
-        Image(
-            painter = painterResource(Res.drawable.duolingo),
-            contentDescription = "",
-            modifier = Modifier
-                .width(40.dp)
-                .padding(horizontal = 2.dp, vertical = 4.dp)
+            .width(300.dp)
+            .padding(vertical = 8.dp),
+        shape = RoundedCornerShape(8.dp),
+        elevation = CardDefaults.elevatedCardElevation(
+            defaultElevation = 4.dp
         )
-        Text(text = app.name)
-        Spacer(modifier = Modifier.width(4.dp))
-        Text(text = "¥${app.revenue}")
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 8.dp, vertical = 16.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            Image(
+                painter = painterResource(Res.drawable.duolingo),
+                contentDescription = "",
+                modifier = Modifier
+                    .width(40.dp)
+            )
+            Text(
+                text = app.name,
+                modifier = Modifier.weight(1f),
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Normal,
+                style = MaterialTheme.typography.bodySmall
+            )
+            Text(
+                text = "¥${app.revenue}",
+                color = Color.Gray,
+                fontSize = 16.sp,
+                style = MaterialTheme.typography.bodySmall
+            )
+        }
     }
 }
 
