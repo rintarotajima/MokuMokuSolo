@@ -19,6 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.mokumokusolo.model.App
+import com.example.mokumokusolo.model.Expenditure
 import mokumokusolo.composeapp.generated.resources.Res
 import mokumokusolo.composeapp.generated.resources.duolingo
 import org.jetbrains.compose.resources.painterResource
@@ -44,6 +45,23 @@ fun HomeScreen(modifier: Modifier = Modifier) {
             name = "Duolingo3",
             image = painterResource(Res.drawable.duolingo),
             revenue = 2000.0
+        )
+    )
+    val sampleExpenditures = listOf(
+        Expenditure(
+            id = 1,
+            name = "Netflix",
+            amount = 780.0
+        ),
+        Expenditure(
+            id = 2,
+            name = "Amazon Prime",
+            amount = 600.0
+        ),
+        Expenditure(
+            id = 3,
+            name = "Spotify",
+            amount = 1080.0
         )
     )
     Scaffold(
@@ -78,6 +96,9 @@ fun HomeScreen(modifier: Modifier = Modifier) {
             AppList(
                 appList = sampleApps,
                 modifier = Modifier.width(300.dp)
+            )
+            ExpenditureList(
+                expenditureList = sampleExpenditures,
             )
         }
     }
