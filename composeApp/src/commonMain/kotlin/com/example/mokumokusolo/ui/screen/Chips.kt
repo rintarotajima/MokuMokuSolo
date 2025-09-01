@@ -21,11 +21,14 @@ import com.example.mokumokusolo.ui.theme.MokuMokuSoloTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-fun AppsChip(modifier: Modifier = Modifier) {
-    var selected by remember { mutableStateOf(false) }
+fun AppsChip(
+    selected: Boolean,
+    onClicked: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     ElevatedFilterChip(
         selected = selected,
-        onClick = { selected = !selected },
+        onClick = onClicked,
         label = { Text(text = "アプリ") },
         modifier = modifier.padding(4.dp),
         leadingIcon = {
@@ -38,11 +41,14 @@ fun AppsChip(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun AllChip(modifier: Modifier = Modifier) {
-    var selected by remember { mutableStateOf(false) }
+fun AllChip(
+    selected: Boolean,
+    onClicked: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     ElevatedFilterChip(
         selected = selected,
-        onClick = { selected = !selected },
+        onClick = onClicked,
         label = { Text(text = "すべて") },
         modifier = modifier.padding(4.dp),
         leadingIcon = {
@@ -55,11 +61,14 @@ fun AllChip(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun ExpenditureChip(modifier: Modifier = Modifier) {
-    var selected by remember { mutableStateOf(false) }
+fun ExpenditureChip(
+    selected: Boolean,
+    onClicked: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     ElevatedFilterChip(
         selected = selected,
-        onClick = { selected = !selected },
+        onClick = onClicked,
         label = { Text(text = "支出") },
         modifier = modifier.padding(4.dp),
         leadingIcon = {
@@ -76,12 +85,22 @@ fun ExpenditureChip(modifier: Modifier = Modifier) {
 @Composable
 fun ChipsPreview() {
     MokuMokuSoloTheme {
+        var selectedChip by remember { mutableStateOf("all") }
         Row(
             horizontalArrangement = Arrangement.SpaceAround,
         ) {
-            AllChip()
-            AppsChip()
-            ExpenditureChip()
+            AllChip(
+                selected = selectedChip == "all",
+                onClicked = { selectedChip = "all"}
+            )
+            AppsChip(
+                selected = selectedChip == "apps",
+                onClicked = { selectedChip = "apps"}
+            )
+            ExpenditureChip(
+                selected = selectedChip == "expenditures",
+                onClicked = { selectedChip = "expenditures" }
+            )
         }
     }
 }
