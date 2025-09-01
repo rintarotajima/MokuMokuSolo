@@ -15,6 +15,10 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -27,6 +31,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun HomeScreen(modifier: Modifier = Modifier) {
+    var selectedChip by remember { mutableStateOf("all") }
     val sampleApps = listOf(
         App(
             id = 1,
@@ -64,6 +69,7 @@ fun HomeScreen(modifier: Modifier = Modifier) {
             amount = 1080.0
         )
     )
+
     Scaffold(
         modifier = modifier
             .fillMaxSize()
@@ -89,17 +95,39 @@ fun HomeScreen(modifier: Modifier = Modifier) {
                 horizontalArrangement = Arrangement.SpaceAround,
                 modifier = Modifier.padding(top = 16.dp)
             ) {
-                AllChip()
-                AppsChip()
-                ExpenditureChip()
+                AllChip(
+                    selected = selectedChip == "all",
+                    onClicked = { selectedChip = "all" }
+                )
+                AppsChip(
+                    selected = selectedChip == "apps",
+                    onClicked = { selectedChip = "apps" }
+                )
+                ExpenditureChip(
+                    selected = selectedChip == "expenditure",
+                    onClicked = { selectedChip = "expenditure" }
+                )
             }
-            AppList(
-                appList = sampleApps,
-                modifier = Modifier.width(300.dp)
-            )
-            ExpenditureList(
-                expenditureList = sampleExpenditures,
-            )
+
+            when (selectedChip) {
+                "all" -> {
+                    AppList(
+                        appList = sampleApps,
+                        modifier = Modifier.width(300.dp)
+                    )
+                    ExpenditureList(
+                        expenditureList = sampleExpenditures
+                    )
+                }
+
+                "apps" -> AppList(
+                    appList = sampleApps,
+                )
+
+                "expenditure" -> ExpenditureList(
+                    expenditureList = sampleExpenditures
+                )
+            }
         }
     }
 }
