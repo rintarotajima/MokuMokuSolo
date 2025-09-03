@@ -32,6 +32,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun HomeScreen(modifier: Modifier = Modifier) {
     var selectedChip by remember { mutableStateOf("all") }
+    var showAddItemScreen by remember { mutableStateOf(false) }
     val sampleApps = listOf(
         App(
             id = 1,
@@ -70,63 +71,68 @@ fun HomeScreen(modifier: Modifier = Modifier) {
         )
     )
 
-    Scaffold(
-        modifier = modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background),
-        floatingActionButton = {
-            FloatingActionButton(
-                onClick = {},
-                containerColor = MaterialTheme.colorScheme.primaryContainer
-            ) {
-                Icon(Icons.Default.Add, "")
+    if (showAddItemScreen) {
+        AddItemScreen(
+            onClose = { showAddItemScreen = false }
+        )
+    } else {
+        Scaffold(
+            modifier = modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.background),
+            floatingActionButton = {
+                FloatingActionButton(
+                    onClick = { showAddItemScreen = true },
+                    containerColor = MaterialTheme.colorScheme.primaryContainer
+                ) {
+                    Icon(Icons.Default.Add, "")
+                }
             }
-        }
-    ) { paddingValues ->
-        Column(
-            modifier = Modifier
-                .padding(paddingValues)
-                .padding(top = 16.dp)
-                .fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            HomeCards()
-            Row(
-                horizontalArrangement = Arrangement.SpaceAround,
-                modifier = Modifier.padding(top = 16.dp)
+        ) { paddingValues ->
+            Column(
+                modifier = Modifier
+                    .padding(paddingValues)
+                    .padding(top = 16.dp)
+                    .fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                AllChip(
-                    selected = selectedChip == "all",
-                    onClicked = { selectedChip = "all" }
-                )
-                AppsChip(
-                    selected = selectedChip == "apps",
-                    onClicked = { selectedChip = "apps" }
-                )
-                ExpenditureChip(
-                    selected = selectedChip == "expenditure",
-                    onClicked = { selectedChip = "expenditure" }
-                )
-            }
-
-            when (selectedChip) {
-                "all" -> {
-                    AppList(
-                        appList = sampleApps,
-                        modifier = Modifier.width(300.dp)
+                HomeCards()
+                Row(
+                    horizontalArrangement = Arrangement.SpaceAround,
+                    modifier = Modifier.padding(top = 16.dp)
+                ) {
+                    AllChip(
+                        selected = selectedChip == "all",
+                        onClicked = { selectedChip = "all" }
                     )
-                    ExpenditureList(
+                    AppsChip(
+                        selected = selectedChip == "apps",
+                        onClicked = { selectedChip = "apps" }
+                    )
+                    ExpenditureChip(
+                        selected = selectedChip == "expenditure",
+                        onClicked = { selectedChip = "expenditure" }
+                    )
+                }
+                when (selectedChip) {
+                    "all" -> {
+                        AppList(
+                            appList = sampleApps,
+                            modifier = Modifier.width(300.dp)
+                        )
+                        ExpenditureList(
+                            expenditureList = sampleExpenditures
+                        )
+                    }
+
+                    "apps" -> AppList(
+                        appList = sampleApps,
+                    )
+
+                    "expenditure" -> ExpenditureList(
                         expenditureList = sampleExpenditures
                     )
                 }
-
-                "apps" -> AppList(
-                    appList = sampleApps,
-                )
-
-                "expenditure" -> ExpenditureList(
-                    expenditureList = sampleExpenditures
-                )
             }
         }
     }
