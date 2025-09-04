@@ -1,4 +1,4 @@
-package com.example.mokumokusolo.ui.screen
+package com.example.mokumokusolo.ui.screen.addItem
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.background

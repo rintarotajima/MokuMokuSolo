@@ -1,4 +1,4 @@
-package com.example.mokumokusolo.ui.screen
+package com.example.mokumokusolo.ui.screen.addItem
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer

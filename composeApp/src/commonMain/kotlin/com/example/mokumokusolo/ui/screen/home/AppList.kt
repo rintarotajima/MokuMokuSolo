@@ -1,5 +1,6 @@
-package com.example.mokumokusolo.ui.screen
+package com.example.mokumokusolo.ui.screen.home
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -19,56 +20,57 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.mokumokusolo.model.Expenditure
+import com.example.mokumokusolo.model.App
 import com.example.mokumokusolo.ui.theme.MokuMokuSoloTheme
+import mokumokusolo.composeapp.generated.resources.Res
+import mokumokusolo.composeapp.generated.resources.duolingo
+import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-fun ExpenditureList(
-    expenditureList: List<Expenditure>,
-    modifier: Modifier = Modifier
-) {
+fun AppList(appList: List<App>, modifier: Modifier = Modifier) {
     LazyColumn(
         modifier = modifier
     ) {
-        items(expenditureList) { expenditure ->
-            ExpenditureListItem(expenditure)
+        items(appList) { app ->
+            AppListItem(app)
         }
     }
 }
 
 @Preview
 @Composable
-fun ExpenditureListPreview() {
+private fun AppListPreview() {
     MokuMokuSoloTheme {
-        val sampleExpenditures = listOf(
-            Expenditure(
+        val sampleApps = listOf(
+            App(
                 id = 1,
-                name = "Netflix",
-                amount = 780.0
+                name = "Duolingo",
+                image = painterResource(Res.drawable.duolingo),
+                revenue = 1000.0
             ),
-            Expenditure(
+            App(
                 id = 2,
-                name = "Amazon Prime",
-                amount = 600.0
+                name = "Duolingo2",
+                image = painterResource(Res.drawable.duolingo),
+                revenue = 1500.0
             ),
-            Expenditure(
+            App(
                 id = 3,
-                name = "Spotify",
-                amount = 1080.0
+                name = "Duolingo3",
+                image = painterResource(Res.drawable.duolingo),
+                revenue = 2000.0
             )
         )
-        ExpenditureList(
-            expenditureList = sampleExpenditures
+        AppList(
+            appList = sampleApps
         )
     }
 }
 
+
 @Composable
-fun ExpenditureListItem(
-    expenditure: Expenditure,
-    modifier: Modifier = Modifier
-) {
+fun AppListItem(app: App, modifier: Modifier = Modifier) {
     ElevatedCard(
         modifier = modifier
             .width(300.dp)
@@ -81,20 +83,27 @@ fun ExpenditureListItem(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = 8.dp, horizontal = 16.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            verticalAlignment = Alignment.CenterVertically
+                .padding(horizontal = 8.dp, vertical = 16.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
+            Image(
+                painter = painterResource(Res.drawable.duolingo),
+                contentDescription = "",
+                modifier = Modifier
+                    .width(40.dp)
+            )
             Text(
-                text = expenditure.name,
+                text = app.name,
                 modifier = Modifier.weight(1f),
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Normal,
                 style = MaterialTheme.typography.bodySmall
             )
             Text(
-                text = "¥${expenditure.amount}",
+                text = "¥${app.revenue}",
                 color = Color.Gray,
+                fontSize = 16.sp,
                 style = MaterialTheme.typography.bodySmall
             )
         }
@@ -103,13 +112,14 @@ fun ExpenditureListItem(
 
 @Preview
 @Composable
-private fun ExpenditureListItemPreview() {
+fun AppListItemPreview() {
     MokuMokuSoloTheme {
-        ExpenditureListItem(
-            expenditure = Expenditure(
+        AppListItem(
+            app = App(
                 id = 1,
-                name = "Netflix",
-                amount = 1000.0
+                name = "Duolingo",
+                image = painterResource(Res.drawable.duolingo),
+                revenue = 1000.0
             )
         )
     }
