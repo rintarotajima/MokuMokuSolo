@@ -1,4 +1,4 @@
-package com.example.mokumokusolo.ui.screen
+package com.example.mokumokusolo.ui.screen.home
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -24,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.mokumokusolo.model.App
 import com.example.mokumokusolo.model.Expenditure
+import com.example.mokumokusolo.ui.screen.addItem.AddItemScreen
 import mokumokusolo.composeapp.generated.resources.Res
 import mokumokusolo.composeapp.generated.resources.duolingo
 import org.jetbrains.compose.resources.painterResource
