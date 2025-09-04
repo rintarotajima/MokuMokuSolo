@@ -3,6 +3,7 @@ package com.example.mokumokusolo.ui.screen
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
@@ -48,6 +49,8 @@ fun AddItemScreen(
                 .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            SingleChoiceSegmentedButton()
+            Spacer(modifier = Modifier.height(16.dp))
             TextField(
                 value = "",
                 onValueChange = {},
