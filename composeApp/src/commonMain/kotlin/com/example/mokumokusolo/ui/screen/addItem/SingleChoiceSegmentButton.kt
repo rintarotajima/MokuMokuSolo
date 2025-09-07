@@ -13,9 +13,6 @@ import androidx.compose.material3.SingleChoiceSegmentedButtonRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -23,10 +20,12 @@ import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-fun SingleChoiceSegmentedButton(modifier: Modifier = Modifier) {
-    var selectedIndex by remember { mutableIntStateOf(0) }
+fun SingleChoiceSegmentedButton(
+    modifier: Modifier = Modifier,
+    selectedIndex: Int,
+    onSelectedIndex: (Int) -> Unit
+) {
     val options = listOf("収益", "支出")
-
     SingleChoiceSegmentedButtonRow(
         modifier = modifier
             .fillMaxWidth()
@@ -52,7 +51,7 @@ fun SingleChoiceSegmentedButton(modifier: Modifier = Modifier) {
                     .height(32.dp)
                     .clip(shape)
                     .background(bgColor)
-                    .clickable { selectedIndex = index },
+                    .clickable { onSelectedIndex(index) },
                 contentAlignment = Alignment.Center
             ) {
                 Text(
@@ -73,5 +72,8 @@ fun SingleChoiceSegmentedButton(modifier: Modifier = Modifier) {
 @Preview
 @Composable
 fun SingleChoiceSegmentedButtonPreview() {
-    SingleChoiceSegmentedButton()
+    SingleChoiceSegmentedButton(
+        selectedIndex = 0,
+        onSelectedIndex = {}
+    )
 }

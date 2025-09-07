@@ -15,9 +15,13 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -30,6 +34,11 @@ fun AddItemScreen(
     onClose: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    var selectedIndex by remember { mutableIntStateOf(0) }
+    var appName by remember { mutableStateOf("") }
+    var appAmount by remember { mutableStateOf("") }
+    var expenditureName by remember { mutableStateOf("") }
+    var expenditureAmount by remember { mutableStateOf("") }
     Scaffold(
         modifier = modifier.fillMaxSize(),
         topBar = {
@@ -55,20 +64,40 @@ fun AddItemScreen(
                 .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            SingleChoiceSegmentedButton()
+            SingleChoiceSegmentedButton(
+                selectedIndex = selectedIndex,
+                onSelectedIndex = { selectedIndex = it }
+            )
             Spacer(modifier = Modifier.height(16.dp))
-            TextField(
-                value = "",
-                onValueChange = {},
-                label = { Text(text = "アプリ名") },
-                placeholder = { Text(text = "MokuMokuSolo") }
-            )
-            Spacer(modifier = Modifier.padding(8.dp))
-            TextField(
-                value = "",
-                onValueChange = {},
-                label = { Text(text = "現在の収益(月)") },
-            )
+            if (selectedIndex == 0) {
+                AddItemTextField(
+                    value = appName,
+                    onValueChange = { appName = it },
+                    label = { Text(text = "アプリ名") },
+                    placeholder = { Text(text = "MokuMokuSolo") }
+                )
+                Spacer(modifier = Modifier.padding(8.dp))
+                AddItemTextField(
+                    value = appAmount,
+                    onValueChange = { appAmount = it },
+                    label = { Text(text = "現在の収益(月)") },
+                    placeholder = { Text(text = "¥1,000") }
+                )
+            } else {
+                AddItemTextField(
+                    value = expenditureName,
+                    onValueChange = { expenditureName = it },
+                    label = { Text(text = "サービス名") },
+                    placeholder = { Text(text = "Netflix") }
+                )
+                Spacer(modifier = Modifier.padding(8.dp))
+                AddItemTextField(
+                    value = expenditureAmount,
+                    onValueChange = { expenditureAmount = it },
+                    label = { Text(text = "現在の支出(月)") },
+                    placeholder = { Text(text = "¥1,000") }
+                )
+            }
             Spacer(modifier = Modifier.padding(8.dp))
             Button(onClick = {}) {
                 Text("登録")
