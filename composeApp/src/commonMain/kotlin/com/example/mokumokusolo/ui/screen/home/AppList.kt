@@ -1,6 +1,5 @@
 package com.example.mokumokusolo.ui.screen.home
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -22,9 +21,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mokumokusolo.model.App
 import com.example.mokumokusolo.ui.theme.MokuMokuSoloTheme
-import mokumokusolo.composeapp.generated.resources.Res
-import mokumokusolo.composeapp.generated.resources.duolingo
-import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
@@ -46,20 +42,17 @@ private fun AppListPreview() {
             App(
                 id = 1,
                 name = "Duolingo",
-                image = painterResource(Res.drawable.duolingo),
-                revenue = 1000.0
+                amount = 1000.0
             ),
             App(
                 id = 2,
                 name = "Duolingo2",
-                image = painterResource(Res.drawable.duolingo),
-                revenue = 1500.0
+                amount = 1500.0
             ),
             App(
                 id = 3,
                 name = "Duolingo3",
-                image = painterResource(Res.drawable.duolingo),
-                revenue = 2000.0
+                amount = 2000.0
             )
         )
         AppList(
@@ -87,12 +80,6 @@ fun AppListItem(app: App, modifier: Modifier = Modifier) {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            Image(
-                painter = painterResource(Res.drawable.duolingo),
-                contentDescription = "",
-                modifier = Modifier
-                    .width(40.dp)
-            )
             Text(
                 text = app.name,
                 modifier = Modifier.weight(1f),
@@ -101,7 +88,7 @@ fun AppListItem(app: App, modifier: Modifier = Modifier) {
                 style = MaterialTheme.typography.bodySmall
             )
             Text(
-                text = "¥${app.revenue}",
+                text = "¥${app.amount}",
                 color = Color.Gray,
                 fontSize = 16.sp,
                 style = MaterialTheme.typography.bodySmall
@@ -118,8 +105,7 @@ fun AppListItemPreview() {
             app = App(
                 id = 1,
                 name = "Duolingo",
-                image = painterResource(Res.drawable.duolingo),
-                revenue = 1000.0
+                amount = 1000.0
             )
         )
     }

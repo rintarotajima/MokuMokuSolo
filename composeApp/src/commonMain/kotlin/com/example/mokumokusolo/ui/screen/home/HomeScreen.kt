@@ -25,52 +25,15 @@ import androidx.compose.ui.unit.dp
 import com.example.mokumokusolo.model.App
 import com.example.mokumokusolo.model.Expenditure
 import com.example.mokumokusolo.ui.screen.addItem.AddItemScreen
-import mokumokusolo.composeapp.generated.resources.Res
-import mokumokusolo.composeapp.generated.resources.duolingo
-import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun HomeScreen(modifier: Modifier = Modifier) {
     var selectedChip by remember { mutableStateOf("all") }
     var showAddItemScreen by remember { mutableStateOf(false) }
-    val sampleApps = listOf(
-        App(
-            id = 1,
-            name = "Duolingo",
-            image = painterResource(Res.drawable.duolingo),
-            revenue = 1000.0
-        ),
-        App(
-            id = 2,
-            name = "Duolingo2",
-            image = painterResource(Res.drawable.duolingo),
-            revenue = 1500.0
-        ),
-        App(
-            id = 3,
-            name = "Duolingo3",
-            image = painterResource(Res.drawable.duolingo),
-            revenue = 2000.0
-        )
-    )
-    val sampleExpenditures = listOf(
-        Expenditure(
-            id = 1,
-            name = "Netflix",
-            amount = 780.0
-        ),
-        Expenditure(
-            id = 2,
-            name = "Amazon Prime",
-            amount = 600.0
-        ),
-        Expenditure(
-            id = 3,
-            name = "Spotify",
-            amount = 1080.0
-        )
-    )
+
+    var apps by remember { mutableStateOf(emptyList<App>()) }
+    var expenditures by remember { mutableStateOf(emptyList<Expenditure>()) }
 
     if (showAddItemScreen) {
         AddItemScreen(
@@ -118,20 +81,20 @@ fun HomeScreen(modifier: Modifier = Modifier) {
                 when (selectedChip) {
                     "all" -> {
                         AppList(
-                            appList = sampleApps,
+                            appList = apps,
                             modifier = Modifier.width(300.dp)
                         )
                         ExpenditureList(
-                            expenditureList = sampleExpenditures
+                            expenditureList = expenditures,
                         )
                     }
 
                     "apps" -> AppList(
-                        appList = sampleApps,
+                        appList = apps,
                     )
 
                     "expenditure" -> ExpenditureList(
-                        expenditureList = sampleExpenditures
+                        expenditureList = expenditures,
                     )
                 }
             }
