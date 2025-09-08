@@ -28,19 +28,19 @@ import com.example.mokumokusolo.ui.theme.MokuMokuSoloTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 data class AddItemFormState(
-    var selectedIndex: Int = 0,
+    val selectedIndex: Int = 0,
     val incomeData: IncomeData = IncomeData(),
     val expenseData: ExpenseData = ExpenseData()
 )
 
 data class IncomeData(
-    var name: String = "",
-    var amount: String = ""
+    val name: String = "",
+    val amount: String = ""
 )
 
 data class ExpenseData(
-    var name: String = "",
-    var amount: String = ""
+    val name: String = "",
+    val amount: String = ""
 )
 
 @OptIn(ExperimentalMaterial3Api::class)
