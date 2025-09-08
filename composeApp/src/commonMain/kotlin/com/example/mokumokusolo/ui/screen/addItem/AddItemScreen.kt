@@ -54,7 +54,12 @@ fun AddItemScreen(
         modifier = modifier.fillMaxSize(),
         topBar = {
             CenterAlignedTopAppBar(
-                title = { Text(text = "追加") },
+                title = {
+                    Text(
+                        text = "追加",
+                        style = MaterialTheme.typography.titleSmall
+                    )
+                },
                 navigationIcon = {
                     IconButton(onClick = onClose) {
                         Icon(
