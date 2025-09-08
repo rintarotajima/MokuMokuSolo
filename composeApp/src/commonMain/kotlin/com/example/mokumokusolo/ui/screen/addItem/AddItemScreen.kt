@@ -18,7 +18,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -28,17 +27,29 @@ import androidx.compose.ui.unit.dp
 import com.example.mokumokusolo.ui.theme.MokuMokuSoloTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
+data class AddItemFormState(
+    val selectedIndex: Int = 0,
+    val incomeData: IncomeData = IncomeData(),
+    val expenseData: ExpenseData = ExpenseData()
+)
+
+data class IncomeData(
+    val name: String = "",
+    val amount: String = ""
+)
+
+data class ExpenseData(
+    val name: String = "",
+    val amount: String = ""
+)
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddItemScreen(
     onClose: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    var selectedIndex by remember { mutableIntStateOf(0) }
-    var appName by remember { mutableStateOf("") }
-    var appAmount by remember { mutableStateOf("") }
-    var expenditureName by remember { mutableStateOf("") }
-    var expenditureAmount by remember { mutableStateOf("") }
+    var formState by remember { mutableStateOf(AddItemFormState()) }
     Scaffold(
         modifier = modifier.fillMaxSize(),
         topBar = {
@@ -65,35 +76,53 @@ fun AddItemScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             SingleChoiceSegmentedButton(
-                selectedIndex = selectedIndex,
-                onSelectedIndex = { selectedIndex = it }
+                selectedIndex = formState.selectedIndex,
+                onSelectedIndex = { newIndex ->
+                    formState = formState.copy(selectedIndex = newIndex)
+                }
             )
             Spacer(modifier = Modifier.height(16.dp))
-            if (selectedIndex == 0) {
+            if (formState.selectedIndex == 0) {
                 AddItemTextField(
-                    value = appName,
-                    onValueChange = { appName = it },
+                    value = formState.incomeData.name,
+                    onValueChange = { newIncomeName ->
+                        formState = formState.copy(
+                            incomeData = formState.incomeData.copy(name = newIncomeName)
+                        )
+                    },
                     label = { Text(text = "アプリ名") },
                     placeholder = { Text(text = "MokuMokuSolo") }
                 )
                 Spacer(modifier = Modifier.padding(8.dp))
                 AddItemTextField(
-                    value = appAmount,
-                    onValueChange = { appAmount = it },
+                    value = formState.incomeData.amount,
+                    onValueChange = { newIncomeAmount ->
+                        formState = formState.copy(
+                            incomeData = formState.incomeData.copy(amount = newIncomeAmount)
+                        )
+                    },
                     label = { Text(text = "現在の収益(月)") },
                     placeholder = { Text(text = "¥1,000") }
                 )
             } else {
                 AddItemTextField(
-                    value = expenditureName,
-                    onValueChange = { expenditureName = it },
+                    value = formState.expenseData.name,
+                    onValueChange = { newExpenseName ->
+                        formState = formState.copy(
+                            expenseData = formState.expenseData.copy(name = newExpenseName)
+                        )
+                    },
                     label = { Text(text = "サービス名") },
                     placeholder = { Text(text = "Netflix") }
                 )
                 Spacer(modifier = Modifier.padding(8.dp))
                 AddItemTextField(
-                    value = expenditureAmount,
-                    onValueChange = { expenditureAmount = it },
+                    value = formState.expenseData.amount,
+                    onValueChange = { newExpenseAmount ->
+                        formState = formState.copy(
+                            expenseData = formState.expenseData.copy(amount = newExpenseAmount)
+                        )
+                    },
                     label = { Text(text = "現在の支出(月)") },
                     placeholder = { Text(text = "¥1,000") }
                 )
