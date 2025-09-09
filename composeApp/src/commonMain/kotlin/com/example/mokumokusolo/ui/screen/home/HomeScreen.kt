@@ -37,7 +37,21 @@ fun HomeScreen(modifier: Modifier = Modifier) {
 
     if (showAddItemScreen) {
         AddItemScreen(
-            onClose = { showAddItemScreen = false }
+            onClose = { showAddItemScreen = false },
+            onAddItem = { isIncome, name, amount ->
+                if (isIncome) {
+                    val newApp = App(id = apps.size + 1, name = name, amount = amount.toDouble())
+                    apps = apps + newApp
+                } else {
+                    val newExpenditure = Expenditure(
+                        id = expenditures.size + 1,
+                        name = name,
+                        amount = amount.toDouble()
+                    )
+                    expenditures = expenditures + newExpenditure
+                }
+                showAddItemScreen = false
+            }
         )
     } else {
         Scaffold(

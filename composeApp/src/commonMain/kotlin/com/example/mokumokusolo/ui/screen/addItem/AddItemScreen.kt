@@ -47,9 +47,11 @@ data class ExpenseData(
 @Composable
 fun AddItemScreen(
     onClose: () -> Unit,
+    onAddItem: ((isIncome: Boolean, name: String, amount: String) -> Unit)? = null,
     modifier: Modifier = Modifier
 ) {
     var formState by remember { mutableStateOf(AddItemFormState()) }
+
     Scaffold(
         modifier = modifier.fillMaxSize(),
         topBar = {
@@ -133,7 +135,14 @@ fun AddItemScreen(
                 )
             }
             Spacer(modifier = Modifier.padding(8.dp))
-            Button(onClick = {}) {
+            Button(onClick = {
+                val isIncome = formState.selectedIndex == 0
+                val name = if (isIncome) formState.incomeData.name else formState.expenseData.name
+                val amount =
+                    if (isIncome) formState.incomeData.amount else formState.expenseData.amount
+                onAddItem?.invoke(isIncome, name, amount)
+                onClose()
+            }) {
                 Text("登録")
             }
         }
