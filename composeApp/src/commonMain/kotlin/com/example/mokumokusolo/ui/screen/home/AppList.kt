@@ -1,4 +1,4 @@
-package com.example.mokumokusolo.ui.screen
+package com.example.mokumokusolo.ui.screen.home
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -19,56 +19,51 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.mokumokusolo.model.Expenditure
+import com.example.mokumokusolo.model.App
 import com.example.mokumokusolo.ui.theme.MokuMokuSoloTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-fun ExpenditureList(
-    expenditureList: List<Expenditure>,
-    modifier: Modifier = Modifier
-) {
+fun AppList(appList: List<App>, modifier: Modifier = Modifier) {
     LazyColumn(
         modifier = modifier
     ) {
-        items(expenditureList) { expenditure ->
-            ExpenditureListItem(expenditure)
+        items(appList) { app ->
+            AppListItem(app)
         }
     }
 }
 
 @Preview
 @Composable
-fun ExpenditureListPreview() {
+private fun AppListPreview() {
     MokuMokuSoloTheme {
-        val sampleExpenditures = listOf(
-            Expenditure(
+        val sampleApps = listOf(
+            App(
                 id = 1,
-                name = "Netflix",
-                amount = 780.0
+                name = "Duolingo",
+                amount = 1000.0
             ),
-            Expenditure(
+            App(
                 id = 2,
-                name = "Amazon Prime",
-                amount = 600.0
+                name = "Duolingo2",
+                amount = 1500.0
             ),
-            Expenditure(
+            App(
                 id = 3,
-                name = "Spotify",
-                amount = 1080.0
+                name = "Duolingo3",
+                amount = 2000.0
             )
         )
-        ExpenditureList(
-            expenditureList = sampleExpenditures
+        AppList(
+            appList = sampleApps
         )
     }
 }
 
+
 @Composable
-fun ExpenditureListItem(
-    expenditure: Expenditure,
-    modifier: Modifier = Modifier
-) {
+fun AppListItem(app: App, modifier: Modifier = Modifier) {
     ElevatedCard(
         modifier = modifier
             .width(300.dp)
@@ -82,19 +77,20 @@ fun ExpenditureListItem(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 8.dp, vertical = 16.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             Text(
-                text = expenditure.name,
+                text = app.name,
                 modifier = Modifier.weight(1f),
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Normal,
                 style = MaterialTheme.typography.bodySmall
             )
             Text(
-                text = "¥${expenditure.amount}",
+                text = "¥${app.amount}",
                 color = Color.Gray,
+                fontSize = 16.sp,
                 style = MaterialTheme.typography.bodySmall
             )
         }
@@ -103,12 +99,12 @@ fun ExpenditureListItem(
 
 @Preview
 @Composable
-private fun ExpenditureListItemPreview() {
+fun AppListItemPreview() {
     MokuMokuSoloTheme {
-        ExpenditureListItem(
-            expenditure = Expenditure(
+        AppListItem(
+            app = App(
                 id = 1,
-                name = "Netflix",
+                name = "Duolingo",
                 amount = 1000.0
             )
         )

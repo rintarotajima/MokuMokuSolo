@@ -40,11 +40,17 @@ val Typography: Typography
             fontSize = 32.sp,
             lineHeight = 36.sp
         ),
+        titleMedium = TextStyle(
+            fontFamily = MontSerrat,
+            fontWeight = FontWeight.Bold,
+            fontSize = 24.sp,
+            lineHeight = 32.sp
+        ),
         titleSmall = TextStyle(
             fontFamily = MontSerrat,
             fontWeight = FontWeight.Medium,
-            fontSize = 17.sp,
-            lineHeight = 24.sp
+            fontSize = 20.sp,
+            lineHeight = 28.sp
         ),
         bodyLarge = TextStyle(
             fontFamily = Lato,

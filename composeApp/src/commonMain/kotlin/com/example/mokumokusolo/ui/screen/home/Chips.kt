@@ -1,4 +1,4 @@
-package com.example.mokumokusolo.ui.screen
+package com.example.mokumokusolo.ui.screen.home
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -91,11 +91,11 @@ fun ChipsPreview() {
         ) {
             AllChip(
                 selected = selectedChip == "all",
-                onClicked = { selectedChip = "all"}
+                onClicked = { selectedChip = "all" }
             )
             AppsChip(
                 selected = selectedChip == "apps",
-                onClicked = { selectedChip = "apps"}
+                onClicked = { selectedChip = "apps" }
             )
             ExpenditureChip(
                 selected = selectedChip == "expenditures",
