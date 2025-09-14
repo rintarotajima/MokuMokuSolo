@@ -74,7 +74,10 @@ fun HomeScreen(modifier: Modifier = Modifier) {
                     .fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                HomeCards()
+                HomeCards(
+                    apps = apps,
+                    expenditures = expenditures
+                )
                 Row(
                     horizontalArrangement = Arrangement.SpaceAround,
                     modifier = Modifier.padding(top = 16.dp)

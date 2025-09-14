@@ -19,15 +19,22 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.mokumokusolo.model.App
+import com.example.mokumokusolo.model.Expenditure
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-fun HomeCards(modifier: Modifier = Modifier) {
+fun HomeCards(
+    modifier: Modifier = Modifier,
+    apps: List<App> = emptyList(),
+    expenditures: List<Expenditure> = emptyList()
+) {
     ElevatedCard(
         modifier = modifier
             .width(300.dp)
@@ -36,7 +43,11 @@ fun HomeCards(modifier: Modifier = Modifier) {
             defaultElevation = 4.dp
         )
     ) {
+        val totalIncome = apps.sumOf { it.amount }
+        val totalExpenditure = expenditures.sumOf { it.amount }
+        val balance = (totalIncome - totalExpenditure).toInt()
         var currentProgress by remember { mutableStateOf(0.5f) }
+
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -48,7 +59,7 @@ fun HomeCards(modifier: Modifier = Modifier) {
             )
             Spacer(modifier = Modifier.size(8.dp))
             Text(
-                text = "¥1,000",
+                text = "¥${balance}",
                 modifier = Modifier.fillMaxWidth(),
                 fontSize = 32.sp,
                 textAlign = TextAlign.Center,
@@ -56,14 +67,15 @@ fun HomeCards(modifier: Modifier = Modifier) {
             )
             Spacer(modifier = Modifier.size(8.dp))
             Text(
-                text = "Next : Netflix1ヶ月分",
+                text = "Next: ",
                 modifier = Modifier.fillMaxWidth(),
                 textAlign = TextAlign.Center
             )
             Spacer(modifier = Modifier.size(8.dp))
             Box(
                 modifier = Modifier
-                    .height(32.dp)
+                    .height(32.dp),
+                contentAlignment = Alignment.Center
             ) {
                 LinearProgressIndicator(
                     progress = { currentProgress },
@@ -76,7 +88,7 @@ fun HomeCards(modifier: Modifier = Modifier) {
                     gapSize = 0.dp
                 )
                 Text(
-                    text = "300/600",
+                    text = "",
                     color = MaterialTheme.colorScheme.onPrimary,
                     fontSize = 16.sp,
                     modifier = Modifier
