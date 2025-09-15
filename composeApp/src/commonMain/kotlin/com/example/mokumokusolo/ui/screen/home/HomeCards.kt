@@ -15,10 +15,6 @@ import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.StrokeCap
@@ -46,7 +42,15 @@ fun HomeCards(
         val totalIncome = apps.sumOf { it.amount }
         val totalExpenditure = expenditures.sumOf { it.amount }
         val balance = (totalIncome - totalExpenditure).toInt()
-        var currentProgress by remember { mutableStateOf(0.5f) }
+
+        // 次の目標支出を取得（最小の支出額）
+        val targetExpenditure = expenditures.minByOrNull { it.amount }
+
+        val progressRatio = if (targetExpenditure != null && targetExpenditure.amount > 0) {
+            (balance.toFloat() / targetExpenditure.amount.toFloat()).coerceIn(0f, 1f)
+        } else {
+            0f
+        }
 
         Column(
             modifier = Modifier
@@ -67,7 +71,11 @@ fun HomeCards(
             )
             Spacer(modifier = Modifier.size(8.dp))
             Text(
-                text = "Next: ",
+                text = if (targetExpenditure != null) {
+                    "Next: ${targetExpenditure.name} (${targetExpenditure.amount.toInt()})"
+                } else {
+                    ""
+                },
                 modifier = Modifier.fillMaxWidth(),
                 textAlign = TextAlign.Center
             )
@@ -78,7 +86,7 @@ fun HomeCards(
                 contentAlignment = Alignment.Center
             ) {
                 LinearProgressIndicator(
-                    progress = { currentProgress },
+                    progress = { progressRatio },
                     modifier = Modifier
                         .height(32.dp)
                         .padding(vertical = 2.dp),
@@ -88,7 +96,11 @@ fun HomeCards(
                     gapSize = 0.dp
                 )
                 Text(
-                    text = "",
+                    text = if (targetExpenditure != null) {
+                        "$balance / ${targetExpenditure.amount.toInt()}"
+                    } else {
+                        "0 / 0"
+                    },
                     color = MaterialTheme.colorScheme.onPrimary,
                     fontSize = 16.sp,
                     modifier = Modifier
