@@ -31,6 +31,8 @@ fun HomeCards(
     apps: List<App> = emptyList(),
     expenditures: List<Expenditure> = emptyList()
 ) {
+    val uiState = updateHomeCardsUiState(apps, expenditures)
+
     ElevatedCard(
         modifier = modifier
             .width(300.dp)
@@ -39,19 +41,6 @@ fun HomeCards(
             defaultElevation = 4.dp
         )
     ) {
-        val totalIncome = apps.sumOf { it.amount }
-        val totalExpenditure = expenditures.sumOf { it.amount }
-        val balance = (totalIncome - totalExpenditure).toInt()
-
-        // 次の目標支出を取得（最小の支出額）
-        val targetExpenditure = expenditures.minByOrNull { it.amount }
-
-        val progressRatio = if (targetExpenditure != null && targetExpenditure.amount > 0) {
-            (balance.toFloat() / targetExpenditure.amount.toFloat()).coerceIn(0f, 1f)
-        } else {
-            0f
-        }
-
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -63,7 +52,7 @@ fun HomeCards(
             )
             Spacer(modifier = Modifier.size(8.dp))
             Text(
-                text = "¥${balance}",
+                text = "¥${uiState.balance}",
                 modifier = Modifier.fillMaxWidth(),
                 fontSize = 32.sp,
                 textAlign = TextAlign.Center,
@@ -71,8 +60,8 @@ fun HomeCards(
             )
             Spacer(modifier = Modifier.size(8.dp))
             Text(
-                text = if (targetExpenditure != null) {
-                    "Next: ${targetExpenditure.name} (${targetExpenditure.amount.toInt()})"
+                text = if (uiState.targetExpenditure != null) {
+                    "Next: ${uiState.targetExpenditure.name} (${uiState.targetExpenditure.amount.toInt()})"
                 } else {
                     ""
                 },
@@ -86,7 +75,7 @@ fun HomeCards(
                 contentAlignment = Alignment.Center
             ) {
                 LinearProgressIndicator(
-                    progress = { progressRatio },
+                    progress = { uiState.progressRatio },
                     modifier = Modifier
                         .height(32.dp)
                         .padding(vertical = 2.dp),
@@ -95,9 +84,10 @@ fun HomeCards(
                     strokeCap = StrokeCap.Butt,
                     gapSize = 0.dp
                 )
+                println("Progress: ${uiState.progressRatio}")
                 Text(
-                    text = if (targetExpenditure != null) {
-                        "$balance / ${targetExpenditure.amount.toInt()}"
+                    text = if (uiState.targetExpenditure != null) {
+                        "${uiState.totalIncome.toInt()} / ${uiState.targetExpenditure.amount.toInt()}"
                     } else {
                         "0 / 0"
                     },
@@ -108,6 +98,7 @@ fun HomeCards(
                         .padding(top = 4.dp),
                     textAlign = TextAlign.Center
                 )
+                println("uiState.displayProgress/uiState.targetExpenditure.amount: ${uiState.totalIncome}/${uiState.targetExpenditure?.amount?.toInt()} ")
             }
         }
     }
