@@ -84,7 +84,6 @@ fun HomeCards(
                     strokeCap = StrokeCap.Butt,
                     gapSize = 0.dp
                 )
-                println("Progress: ${uiState.progressRatio}")
                 Text(
                     text = if (uiState.targetExpenditure != null) {
                         "${uiState.totalIncome.toInt()} / ${uiState.targetExpenditure.amount.toInt()}"
@@ -98,7 +97,6 @@ fun HomeCards(
                         .padding(top = 4.dp),
                     textAlign = TextAlign.Center
                 )
-                println("uiState.displayProgress/uiState.targetExpenditure.amount: ${uiState.totalIncome}/${uiState.targetExpenditure?.amount?.toInt()} ")
             }
         }
     }
