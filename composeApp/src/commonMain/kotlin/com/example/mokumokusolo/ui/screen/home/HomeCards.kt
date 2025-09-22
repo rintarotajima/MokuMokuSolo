@@ -15,10 +15,6 @@ import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.StrokeCap
@@ -35,6 +31,8 @@ fun HomeCards(
     apps: List<App> = emptyList(),
     expenditures: List<Expenditure> = emptyList()
 ) {
+    val uiState = updateHomeCardsUiState(apps, expenditures)
+
     ElevatedCard(
         modifier = modifier
             .width(300.dp)
@@ -43,11 +41,6 @@ fun HomeCards(
             defaultElevation = 4.dp
         )
     ) {
-        val totalIncome = apps.sumOf { it.amount }
-        val totalExpenditure = expenditures.sumOf { it.amount }
-        val balance = (totalIncome - totalExpenditure).toInt()
-        var currentProgress by remember { mutableStateOf(0.5f) }
-
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -59,7 +52,7 @@ fun HomeCards(
             )
             Spacer(modifier = Modifier.size(8.dp))
             Text(
-                text = "¥${balance}",
+                text = "¥${uiState.balance}",
                 modifier = Modifier.fillMaxWidth(),
                 fontSize = 32.sp,
                 textAlign = TextAlign.Center,
@@ -67,7 +60,11 @@ fun HomeCards(
             )
             Spacer(modifier = Modifier.size(8.dp))
             Text(
-                text = "Next: ",
+                text = if (uiState.targetExpenditure != null) {
+                    "Next: ${uiState.targetExpenditure.name} (${uiState.targetExpenditure.amount.toInt()})"
+                } else {
+                    ""
+                },
                 modifier = Modifier.fillMaxWidth(),
                 textAlign = TextAlign.Center
             )
@@ -78,7 +75,7 @@ fun HomeCards(
                 contentAlignment = Alignment.Center
             ) {
                 LinearProgressIndicator(
-                    progress = { currentProgress },
+                    progress = { uiState.progressRatio },
                     modifier = Modifier
                         .height(32.dp)
                         .padding(vertical = 2.dp),
@@ -88,7 +85,11 @@ fun HomeCards(
                     gapSize = 0.dp
                 )
                 Text(
-                    text = "",
+                    text = if (uiState.targetExpenditure != null) {
+                        "${uiState.totalIncome.toInt()} / ${uiState.targetExpenditure.amount.toInt()}"
+                    } else {
+                        "0 / 0"
+                    },
                     color = MaterialTheme.colorScheme.onPrimary,
                     fontSize = 16.sp,
                     modifier = Modifier
