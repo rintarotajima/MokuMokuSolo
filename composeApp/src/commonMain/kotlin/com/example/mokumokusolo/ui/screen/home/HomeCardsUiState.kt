@@ -16,7 +16,7 @@ fun updateHomeCardsUiState(apps: List<App>, expenditures: List<Expenditure>): Ho
     val totalExpenditureAmount = expenditures.sumOf { it.amount }
     val currentBalance = (totalIncome - totalExpenditureAmount).toInt()
 
-    val candidates = expenditures.filter { it.amount >= totalIncome }.sortedBy { it.amount }
+    val candidates = expenditures.filter { it.amount > totalIncome }.sortedBy { it.amount }
     val targetExpenditure = candidates.firstOrNull()
 
     val progressRatio = if (targetExpenditure != null && targetExpenditure.amount > 0) {
