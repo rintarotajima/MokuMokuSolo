@@ -1,16 +1,45 @@
-This is a Kotlin Multiplatform project targeting Android, iOS.
+# MokuMokuSolo(もくもくソロ)
 
-* [/composeApp](./composeApp/src) is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - [commonMain](./composeApp/src/commonMain/kotlin) is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    the [iosMain](./composeApp/src/iosMain/kotlin) folder would be the right place for such calls.
-    Similarly, if you want to edit the Desktop (JVM) specific part, the [jvmMain](./composeApp/src/jvmMain/kotlin)
-    folder is the appropriate location.
+個人開発者のモチベーションを維持・向上させることを目標に継続開発しております。
 
-* [/iosApp](./iosApp/iosApp) contains iOS applications. Even if you’re sharing your UI with Compose Multiplatform,
-  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
+## 🎯 開発背景
 
+アプリで収益を得ることを目的に個人開発に挑戦している人であれば、一度は目標に掲げるであろう月1万・5万・10万円ぐらい稼ぎたいなというリアルな数字。
+しかし、その数字に現実味が無く、やがてモチベーションを無くしてしまい、開発を辞めてしまうという勿体無い体験をする人を減らしたい！！
+そんな思いで開発することを決意しました。
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+## 📱 スクリーンショット
+
+<table>
+ <tr>
+    <td>
+        <img src="./screenshots/ホーム画面.png" alt="" width="200"/>
+    </td>
+    <td>
+        <img src="./screenshots/収益登録フォーム.png" alt="" width="200"/>
+    </td>
+    <td>
+        <img src="./screenshots/支出登録フォーム.png" alt="" width="200"/>
+    </td>
+</tr>
+</table>
+
+## ✨ 主な機能（現在実装されているもの）
+
+- 収益・支出の登録：日々の収益と支出を簡単に登録できます。
+- 収益・支出の一覧表示：登録した収益と支出を一覧で確認できます。
+- 最も達成しやすい目標金額の確認：収益に基づいて、最も達成しやすい目標をプログレスバーで表示します。
+
+## 🎨 今後の展望
+
+リリースすることを目標に、以下の機能を追加していく予定です。
+
+- 収益・支出の編集・削除機能：誤って登録した収益や支出を修正・削除できるようにします。
+- カレンダー表示：収益と支出をカレンダー形式で表示し、日々の収益・支出の傾向を把握しやすくします。
+- 詳細データの分析：ユーザーが登録しているアプリの詳細なデータを視覚的に表示するだけでなく、状況に応じてアドバイスをAIが提供します。
+
+## 使用技術
+
+- Kotlin：2.2.0
+- Compose Multiplatform (UI)：1.8.2
+- Kotlin Multiplatform (ビジネスロジック)
