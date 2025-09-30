@@ -1,7 +1,7 @@
 package com.example.mokumokusolo
 
 import androidx.compose.runtime.Composable
-import com.example.mokumokusolo.ui.screen.home.HomeScreen
+import com.example.mokumokusolo.ui.main.MainScreen
 import com.example.mokumokusolo.ui.theme.MokuMokuSoloTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -9,6 +9,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Preview
 fun App() {
     MokuMokuSoloTheme {
-        HomeScreen()
+        MainScreen()
     }
 }
