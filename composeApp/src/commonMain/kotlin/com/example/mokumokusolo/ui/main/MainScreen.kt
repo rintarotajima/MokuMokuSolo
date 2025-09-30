@@ -101,7 +101,8 @@ fun MainScreen(modifier: Modifier = Modifier) {
                 )
             }
             composable<AppDestination.Calendar> {
-//                CalendarScreen()
+                // Placeholder for Calendar Screen
+                Text("Calendar Screen")
             }
         }
 
