@@ -74,7 +74,7 @@ fun AddItemScreen(
                 }
             )
             Spacer(modifier = Modifier.height(16.dp))
-            if (viewModel.addItemFormState.value.selectedIndex == 0) {
+            if (addItemFormState.selectedIndex == 0) {
                 AddItemTextField(
                     value = addItemFormState.incomeData.name,
                     onValueChange = { newIncomeName ->
