@@ -93,7 +93,7 @@ fun ExpenditureListItem(
                 style = MaterialTheme.typography.bodySmall
             )
             Text(
-                text = "¥${expenditure.amount}",
+                text = "¥${expenditure.amount.toInt()}",
                 color = Color.Gray,
                 style = MaterialTheme.typography.bodySmall
             )
