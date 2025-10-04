@@ -88,7 +88,7 @@ fun AppListItem(app: App, modifier: Modifier = Modifier) {
                 style = MaterialTheme.typography.bodySmall
             )
             Text(
-                text = "¥${app.amount}",
+                text = "¥${app.amount.toInt()}",
                 color = Color.Gray,
                 fontSize = 16.sp,
                 style = MaterialTheme.typography.bodySmall

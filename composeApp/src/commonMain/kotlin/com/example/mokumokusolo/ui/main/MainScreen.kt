@@ -12,11 +12,13 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.NavHost
@@ -32,14 +34,18 @@ import com.example.mokumokusolo.ui.screen.addItem.AddItemScreen
 import com.example.mokumokusolo.ui.screen.home.HomeScreen
 
 @Composable
-fun MainScreen(modifier: Modifier = Modifier) {
+fun MainScreen(
+    modifier: Modifier = Modifier,
+    viewModel: MainViewModel = viewModel()
+) {
     val navController = rememberNavController()
     val currentBackStack by navController.currentBackStackEntryAsState()
     val currentDestination = currentBackStack?.destination
 
+    val apps by viewModel.apps.collectAsState()
+    val expenditures by viewModel.expenditures.collectAsState()
+
     var showAddItemScreen by remember { mutableStateOf(false) }
-    var apps by remember { mutableStateOf(emptyList<App>()) }
-    var expenditures by remember { mutableStateOf(emptyList<Expenditure>()) }
 
     Scaffold(
         modifier = modifier
@@ -113,14 +119,14 @@ fun MainScreen(modifier: Modifier = Modifier) {
                     if (isIncome) {
                         val newApp =
                             App(id = apps.size + 1, name = name, amount = amount.toDouble())
-                        apps = apps + newApp
+                        viewModel.updateApps(newApp)
                     } else {
                         val newExpenditure = Expenditure(
                             id = expenditures.size + 1,
                             name = name,
                             amount = amount.toDouble()
                         )
-                        expenditures = expenditures + newExpenditure
+                        viewModel.updateExpenditures(newExpenditure)
                     }
                     showAddItemScreen = false
                 }
