@@ -36,7 +36,7 @@ import com.example.mokumokusolo.ui.screen.addItem.AddItemScreen
 @Composable
 fun MainScreen(
     modifier: Modifier = Modifier,
-    viewModel: MainViewModel = viewModel()
+    viewModel: MainViewModel = viewModel { MainViewModel() }
 ) {
     val navController = rememberNavController()
     val currentBackStack by navController.currentBackStackEntryAsState()
