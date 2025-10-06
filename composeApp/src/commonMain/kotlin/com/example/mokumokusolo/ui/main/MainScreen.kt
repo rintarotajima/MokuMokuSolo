@@ -30,8 +30,8 @@ import com.example.mokumokusolo.model.App
 import com.example.mokumokusolo.model.Expenditure
 import com.example.mokumokusolo.navigation.AppDestination
 import com.example.mokumokusolo.navigation.bottomNavItems
+import com.example.mokumokusolo.ui.home.HomeScreen
 import com.example.mokumokusolo.ui.screen.addItem.AddItemScreen
-import com.example.mokumokusolo.ui.screen.home.HomeScreen
 
 @Composable
 fun MainScreen(

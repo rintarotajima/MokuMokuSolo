@@ -1,4 +1,4 @@
-package com.example.mokumokusolo.ui.screen.home
+package com.example.mokumokusolo.ui.home
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row

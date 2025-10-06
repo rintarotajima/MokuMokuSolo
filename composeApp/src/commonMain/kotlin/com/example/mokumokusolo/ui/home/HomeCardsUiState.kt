@@ -1,4 +1,4 @@
-package com.example.mokumokusolo.ui.screen.home
+package com.example.mokumokusolo.ui.home
 
 import com.example.mokumokusolo.model.App
 import com.example.mokumokusolo.model.Expenditure
