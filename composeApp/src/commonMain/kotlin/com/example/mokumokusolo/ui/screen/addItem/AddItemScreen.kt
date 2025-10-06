@@ -32,7 +32,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun AddItemScreen(
     onClose: () -> Unit,
     onAddItem: ((isIncome: Boolean, name: String, amount: String) -> Unit)? = null,
-    viewModel: AddItemViewModel = viewModel(),
+    viewModel: AddItemViewModel = viewModel { AddItemViewModel() },
     modifier: Modifier = Modifier
 ) {
     val addItemFormState by viewModel.addItemFormState.collectAsState()
