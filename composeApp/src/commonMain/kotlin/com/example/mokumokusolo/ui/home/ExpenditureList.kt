@@ -95,6 +95,7 @@ fun ExpenditureListItem(
             Text(
                 text = "¥${expenditure.amount.toInt()}",
                 color = Color.Gray,
+                fontSize = 16.sp,
                 style = MaterialTheme.typography.bodySmall
             )
         }
