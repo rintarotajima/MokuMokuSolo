@@ -51,4 +51,8 @@ class AddItemViewModel : ViewModel() {
             expenseData = _addItemFormState.value.expenseData.copy(amount = amount)
         )
     }
+
+    fun resetForm() {
+        _addItemFormState.value = AddItemFormState()
+    }
 }
