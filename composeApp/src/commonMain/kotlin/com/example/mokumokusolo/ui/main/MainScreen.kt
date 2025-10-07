@@ -2,6 +2,7 @@ package com.example.mokumokusolo.ui.main
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.FloatingActionButton
@@ -18,6 +19,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavDestination.Companion.hierarchy
@@ -104,6 +106,7 @@ fun MainScreen(
                 HomeScreen(
                     apps = apps,
                     expenditures = expenditures,
+                    modifier = Modifier.padding(vertical = 16.dp, horizontal = 8.dp)
                 )
             }
             composable<AppDestination.Calendar> {
