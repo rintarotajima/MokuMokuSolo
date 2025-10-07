@@ -119,6 +119,7 @@ fun AddItemScreen(
                 val amount =
                     if (isIncome) addItemFormState.incomeData.amount else addItemFormState.expenseData.amount
                 onAddItem?.invoke(isIncome, name, amount)
+                viewModel.resetForm()
                 onClose()
             }) {
                 Text("登録")
