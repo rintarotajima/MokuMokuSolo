@@ -1,4 +1,4 @@
-package com.example.mokumokusolo.ui.screen.addItem
+package com.example.mokumokusolo.ui.addItem
 
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
