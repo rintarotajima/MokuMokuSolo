@@ -1,8 +1,9 @@
-package com.example.mokumokusolo.data.database.Dao
+package com.example.mokumokusolo.data.database.dao
 
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
+import androidx.room.Query
 import androidx.room.Update
 import com.example.mokumokusolo.data.database.entity.App
 
@@ -16,4 +17,10 @@ interface AppDao {
 
     @Delete
     suspend fun delete(app: App)
+
+    @Query("SELECT * FROM apps")
+    suspend fun getAllApps(): List<App>
+
+    @Query("SELECT * FROM apps WHERE id = :id")
+    suspend fun getAppById(id: Int): App?
 }
