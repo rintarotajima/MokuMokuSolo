@@ -24,5 +24,5 @@ interface AppDao {
     fun getAllApps(): Flow<List<App>>
 
     @Query("SELECT * FROM apps WHERE id = :id")
-    fun getAppById(id: Int): Flow<App>?
+    fun getAppById(id: Int): Flow<App?>
 }
