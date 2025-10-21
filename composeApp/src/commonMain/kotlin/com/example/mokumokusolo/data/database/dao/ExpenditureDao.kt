@@ -7,6 +7,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.example.mokumokusolo.data.database.entity.Expenditure
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ExpenditureDao {
@@ -20,8 +21,8 @@ interface ExpenditureDao {
     suspend fun delete(expenditure: Expenditure)
 
     @Query("SELECT * FROM expenditures")
-    suspend fun getAllExpenditures(): List<Expenditure>
+    fun getAllExpenditures(): Flow<List<Expenditure>>
 
     @Query("SELECT * FROM expenditures WHERE id = :id")
-    suspend fun getExpenditureById(id: Int): Expenditure?
+    fun getExpenditureById(id: Int): Flow<Expenditure>?
 }

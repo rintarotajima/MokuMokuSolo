@@ -7,6 +7,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.example.mokumokusolo.data.database.entity.App
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface AppDao {
@@ -20,8 +21,8 @@ interface AppDao {
     suspend fun delete(app: App)
 
     @Query("SELECT * FROM apps")
-    suspend fun getAllApps(): List<App>
+    fun getAllApps(): Flow<List<App>>
 
     @Query("SELECT * FROM apps WHERE id = :id")
-    suspend fun getAppById(id: Int): App?
+    fun getAppById(id: Int): Flow<App>?
 }
