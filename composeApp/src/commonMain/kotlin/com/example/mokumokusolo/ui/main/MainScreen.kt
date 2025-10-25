@@ -20,7 +20,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.NavHost
@@ -34,11 +33,12 @@ import com.example.mokumokusolo.navigation.AppDestination
 import com.example.mokumokusolo.navigation.bottomNavItems
 import com.example.mokumokusolo.ui.addItem.AddItemScreen
 import com.example.mokumokusolo.ui.home.HomeScreen
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun MainScreen(
     modifier: Modifier = Modifier,
-    viewModel: MainViewModel = viewModel { MainViewModel() }
+    viewModel: MainViewModel = koinViewModel()
 ) {
     val navController = rememberNavController()
     val currentBackStack by navController.currentBackStackEntryAsState()
