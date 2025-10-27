@@ -13,6 +13,9 @@ pluginManagement {
         mavenCentral()
         gradlePluginPortal()
     }
+    plugins {
+        id("com.google.devtools.ksp").version("1.9.23-1.0.20")
+    }
 }
 
 dependencyResolutionManagement {

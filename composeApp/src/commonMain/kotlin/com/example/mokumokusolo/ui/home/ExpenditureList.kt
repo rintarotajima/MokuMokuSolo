@@ -19,13 +19,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.mokumokusolo.model.Expenditure
 import com.example.mokumokusolo.ui.theme.MokuMokuSoloTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun ExpenditureList(
-    expenditureList: List<Expenditure>,
+    expenditureList: List<com.example.mokumokusolo.data.database.entity.Expenditure>,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
@@ -42,20 +41,20 @@ fun ExpenditureList(
 fun ExpenditureListPreview() {
     MokuMokuSoloTheme {
         val sampleExpenditures = listOf(
-            Expenditure(
+            com.example.mokumokusolo.data.database.entity.Expenditure(
                 id = 1,
                 name = "Netflix",
-                amount = 780.0
+                amount = 780
             ),
-            Expenditure(
+            com.example.mokumokusolo.data.database.entity.Expenditure(
                 id = 2,
-                name = "Amazon Prime",
-                amount = 600.0
-            ),
-            Expenditure(
-                id = 3,
                 name = "Spotify",
-                amount = 1080.0
+                amount = 980
+            ),
+            com.example.mokumokusolo.data.database.entity.Expenditure(
+                id = 3,
+                name = "Amazon Prime",
+                amount = 500
             )
         )
         ExpenditureList(
@@ -66,7 +65,7 @@ fun ExpenditureListPreview() {
 
 @Composable
 fun ExpenditureListItem(
-    expenditure: Expenditure,
+    expenditure: com.example.mokumokusolo.data.database.entity.Expenditure,
     modifier: Modifier = Modifier
 ) {
     ElevatedCard(
@@ -107,10 +106,10 @@ fun ExpenditureListItem(
 private fun ExpenditureListItemPreview() {
     MokuMokuSoloTheme {
         ExpenditureListItem(
-            expenditure = Expenditure(
+            expenditure = com.example.mokumokusolo.data.database.entity.Expenditure(
                 id = 1,
                 name = "Netflix",
-                amount = 1000.0
+                amount = 780
             )
         )
     }
