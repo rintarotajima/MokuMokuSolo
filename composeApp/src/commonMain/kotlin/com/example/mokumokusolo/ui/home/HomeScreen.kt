@@ -14,13 +14,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.example.mokumokusolo.data.database.entity.App
 import com.example.mokumokusolo.data.database.entity.Expenditure
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun HomeScreen(
-    apps: List<com.example.mokumokusolo.data.database.entity.App> = emptyList(),
-    expenditures: List<com.example.mokumokusolo.data.database.entity.Expenditure> = emptyList(),
+    apps: List<App> = emptyList(),
+    expenditures: List<Expenditure> = emptyList(),
     modifier: Modifier = Modifier
 ) {
     var selectedChip by remember { mutableStateOf("all") }
@@ -80,7 +81,7 @@ fun HomeScreen(
 fun HomeScreenPreview() {
     HomeScreen(
         apps = listOf(
-            com.example.mokumokusolo.data.database.entity.App(
+            App(
                 id = 1,
                 name = "Twitter",
                 amount = 120,

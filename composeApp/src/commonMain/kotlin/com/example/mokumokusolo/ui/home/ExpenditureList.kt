@@ -19,12 +19,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.mokumokusolo.data.database.entity.Expenditure
 import com.example.mokumokusolo.ui.theme.MokuMokuSoloTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun ExpenditureList(
-    expenditureList: List<com.example.mokumokusolo.data.database.entity.Expenditure>,
+    expenditureList: List<Expenditure>,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(

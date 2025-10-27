@@ -19,12 +19,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.mokumokusolo.data.database.entity.App
 import com.example.mokumokusolo.ui.theme.MokuMokuSoloTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun AppList(
-    appList: List<com.example.mokumokusolo.data.database.entity.App>,
+    appList: List<App>,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
@@ -41,17 +42,17 @@ fun AppList(
 private fun AppListPreview() {
     MokuMokuSoloTheme {
         val sampleApps = listOf(
-            com.example.mokumokusolo.data.database.entity.App(
+            App(
                 id = 1,
                 name = "Duolingo",
                 amount = 1000
             ),
-            com.example.mokumokusolo.data.database.entity.App(
+            App(
                 id = 2,
                 name = "Spotify",
                 amount = 1500
             ),
-            com.example.mokumokusolo.data.database.entity.App(
+            App(
                 id = 3,
                 name = "Netflix",
                 amount = 2000
@@ -66,7 +67,7 @@ private fun AppListPreview() {
 
 @Composable
 fun AppListItem(
-    app: com.example.mokumokusolo.data.database.entity.App,
+    app: App,
     modifier: Modifier = Modifier
 ) {
     ElevatedCard(
@@ -107,7 +108,7 @@ fun AppListItem(
 fun AppListItemPreview() {
     MokuMokuSoloTheme {
         AppListItem(
-            app = com.example.mokumokusolo.data.database.entity.App(
+            app = App(
                 id = 1,
                 name = "Duolingo",
                 amount = 1000

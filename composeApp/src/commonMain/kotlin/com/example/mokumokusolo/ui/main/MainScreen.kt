@@ -27,6 +27,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
+import com.example.mokumokusolo.data.database.entity.App
+import com.example.mokumokusolo.data.database.entity.Expenditure
 import com.example.mokumokusolo.navigation.AppDestination
 import com.example.mokumokusolo.navigation.bottomNavItems
 import com.example.mokumokusolo.ui.addItem.AddItemScreen
@@ -118,19 +120,18 @@ fun MainScreen(
                 onClose = { showAddItemScreen = false },
                 onAddItem = { isIncome, name, amount ->
                     if (isIncome) {
-                        val newApp = com.example.mokumokusolo.data.database.entity.App(
+                        val newApp = App(
                             id = 0,
                             name = name,
                             amount = amount.toLong()
                         )
                         viewModel.addApp(newApp)
                     } else {
-                        val newExpenditure =
-                            com.example.mokumokusolo.data.database.entity.Expenditure(
-                                id = 0,
-                                name = name,
-                                amount = amount.toLong()
-                            )
+                        val newExpenditure = Expenditure(
+                            id = 0,
+                            name = name,
+                            amount = amount.toLong()
+                        )
                         viewModel.addExpenditure(newExpenditure)
                     }
                     showAddItemScreen = false

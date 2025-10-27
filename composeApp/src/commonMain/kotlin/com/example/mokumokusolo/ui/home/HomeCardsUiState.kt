@@ -1,5 +1,8 @@
 package com.example.mokumokusolo.ui.home
 
+import com.example.mokumokusolo.data.database.entity.App
+import com.example.mokumokusolo.data.database.entity.Expenditure
+
 data class HomeCardsUiState(
     val balance: Int,
     val targetExpenditure: com.example.mokumokusolo.data.database.entity.Expenditure?,
@@ -9,8 +12,8 @@ data class HomeCardsUiState(
 )
 
 fun updateHomeCardsUiState(
-    apps: List<com.example.mokumokusolo.data.database.entity.App>,
-    expenditures: List<com.example.mokumokusolo.data.database.entity.Expenditure>
+    apps: List<App>,
+    expenditures: List<Expenditure>
 ): HomeCardsUiState {
     val totalIncome = apps.sumOf { it.amount }
     val totalExpenditureAmount = expenditures.sumOf { it.amount }
