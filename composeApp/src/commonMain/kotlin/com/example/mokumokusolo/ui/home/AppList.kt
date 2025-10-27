@@ -19,12 +19,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.mokumokusolo.model.App
+import com.example.mokumokusolo.data.database.entity.App
 import com.example.mokumokusolo.ui.theme.MokuMokuSoloTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-fun AppList(appList: List<App>, modifier: Modifier = Modifier) {
+fun AppList(
+    appList: List<App>,
+    modifier: Modifier = Modifier
+) {
     LazyColumn(
         modifier = modifier
     ) {
@@ -42,17 +45,17 @@ private fun AppListPreview() {
             App(
                 id = 1,
                 name = "Duolingo",
-                amount = 1000.0
+                amount = 1000
             ),
             App(
                 id = 2,
-                name = "Duolingo2",
-                amount = 1500.0
+                name = "Spotify",
+                amount = 1500
             ),
             App(
                 id = 3,
-                name = "Duolingo3",
-                amount = 2000.0
+                name = "Netflix",
+                amount = 2000
             )
         )
         AppList(
@@ -63,7 +66,10 @@ private fun AppListPreview() {
 
 
 @Composable
-fun AppListItem(app: App, modifier: Modifier = Modifier) {
+fun AppListItem(
+    app: App,
+    modifier: Modifier = Modifier
+) {
     ElevatedCard(
         modifier = modifier
             .width(300.dp)
@@ -105,7 +111,7 @@ fun AppListItemPreview() {
             app = App(
                 id = 1,
                 name = "Duolingo",
-                amount = 1000.0
+                amount = 1000
             )
         )
     }

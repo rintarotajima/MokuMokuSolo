@@ -21,15 +21,13 @@ import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.mokumokusolo.model.App
-import com.example.mokumokusolo.model.Expenditure
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun HomeCards(
     modifier: Modifier = Modifier,
-    apps: List<App> = emptyList(),
-    expenditures: List<Expenditure> = emptyList()
+    apps: List<com.example.mokumokusolo.data.database.entity.App> = emptyList(),
+    expenditures: List<com.example.mokumokusolo.data.database.entity.Expenditure> = emptyList()
 ) {
     val uiState = updateHomeCardsUiState(apps, expenditures)
 

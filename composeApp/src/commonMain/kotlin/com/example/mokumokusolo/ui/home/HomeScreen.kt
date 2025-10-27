@@ -14,8 +14,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.mokumokusolo.model.App
-import com.example.mokumokusolo.model.Expenditure
+import com.example.mokumokusolo.data.database.entity.App
+import com.example.mokumokusolo.data.database.entity.Expenditure
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
@@ -81,12 +81,18 @@ fun HomeScreen(
 fun HomeScreenPreview() {
     HomeScreen(
         apps = listOf(
-            App(1, "MokuMokuSolo", 1000.0),
-            App(2, "AnotherApp", 2000.0)
+            App(
+                id = 1,
+                name = "Twitter",
+                amount = 120,
+            )
         ),
         expenditures = listOf(
-            Expenditure(1, "Netflix", 500.0),
-            Expenditure(2, "Spotify", 300.0)
+            Expenditure(
+                id = 1,
+                name = "Netflix",
+                amount = 1500,
+            )
         )
     )
 }
