@@ -1,11 +1,10 @@
 import SwiftUI
+import ComposeApp
 
 @main
-struct iOSApp: App {
+struct iOSApp: SwiftUI.App {
     init() {
-        DIKoinKt.initKoin {
-            modules([DIKoinKt.iosModule()])
-        }
+        PlatformModule_iosKt.doInitKoinIos()
     }
 
     var body: some Scene {
