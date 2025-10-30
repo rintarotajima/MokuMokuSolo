@@ -1,0 +1,130 @@
+package com.example.mokumokusolo.ui.editItem
+
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.mokumokusolo.data.database.entity.App
+import com.example.mokumokusolo.data.database.entity.Expenditure
+import com.example.mokumokusolo.data.repository.AppRepository
+import com.example.mokumokusolo.data.repository.ExpenditureRepository
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.launch
+
+data class EditItemUiState(
+    val itemType: String = "", // "app" or "expenditure"
+    val name: String = "",
+    val amount: String = "",
+    val isLoading: Boolean = true,
+    val itemId: Int? = null
+)
+
+class EditItemViewModel(
+    private val appRepository: AppRepository,
+    private val expenditureRepository: ExpenditureRepository,
+    private val itemId: Int,
+    private val itemType: String
+) : ViewModel() {
+
+    private val _uiState = MutableStateFlow(EditItemUiState(itemType = itemType))
+    val uiState: StateFlow<EditItemUiState> = _uiState
+
+    init {
+        loadItem()
+    }
+
+    private fun loadItem() {
+        viewModelScope.launch {
+            _uiState.value = _uiState.value.copy(isLoading = true)
+
+            when (itemType) {
+                "app" -> {
+                    val app = appRepository.getAppById(itemId).firstOrNull()
+                    app?.let {
+                        _uiState.value = EditItemUiState(
+                            itemType = itemType,
+                            name = it.name,
+                            amount = it.amount.toString(),
+                            isLoading = false,
+                            itemId = it.id
+                        )
+                    }
+                }
+                "expenditure" -> {
+                    val expenditure = expenditureRepository.getExpenditureById(itemId).firstOrNull()
+                    expenditure?.let {
+                        _uiState.value = EditItemUiState(
+                            itemType = itemType,
+                            name = it.name,
+                            amount = it.amount.toString(),
+                            isLoading = false,
+                            itemId = it.id
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+    fun updateName(newName: String) {
+        _uiState.value = _uiState.value.copy(name = newName)
+    }
+
+    fun updateAmount(newAmount: String) {
+        _uiState.value = _uiState.value.copy(amount = newAmount)
+    }
+
+    fun saveItem(onSuccess: () -> Unit) {
+        viewModelScope.launch {
+            val state = _uiState.value
+            val id = state.itemId ?: return@launch
+
+            when (state.itemType) {
+                "app" -> {
+                    val app = App(
+                        id = id,
+                        name = state.name,
+                        amount = state.amount.toLongOrNull() ?: 0L
+                    )
+                    appRepository.updateApp(app)
+                }
+                "expenditure" -> {
+                    val expenditure = Expenditure(
+                        id = id,
+                        name = state.name,
+                        amount = state.amount.toLongOrNull() ?: 0L
+                    )
+                    expenditureRepository.updateExpenditure(expenditure)
+                }
+            }
+            onSuccess()
+        }
+    }
+
+    fun deleteItem(onSuccess: () -> Unit) {
+        viewModelScope.launch {
+            val state = _uiState.value
+            val id = state.itemId ?: return@launch
+
+            when (state.itemType) {
+                "app" -> {
+                    val app = App(
+                        id = id,
+                        name = state.name,
+                        amount = state.amount.toLongOrNull() ?: 0L
+                    )
+                    appRepository.deleteApp(app)
+                }
+                "expenditure" -> {
+                    val expenditure = Expenditure(
+                        id = id,
+                        name = state.name,
+                        amount = state.amount.toLongOrNull() ?: 0L
+                    )
+                    expenditureRepository.deleteExpenditure(expenditure)
+                }
+            }
+            onSuccess()
+        }
+    }
+}

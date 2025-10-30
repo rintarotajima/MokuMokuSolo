@@ -27,13 +27,17 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
+import androidx.navigation.toRoute
 import com.example.mokumokusolo.data.database.entity.App
 import com.example.mokumokusolo.data.database.entity.Expenditure
 import com.example.mokumokusolo.navigation.AppDestination
 import com.example.mokumokusolo.navigation.bottomNavItems
 import com.example.mokumokusolo.ui.addItem.AddItemScreen
+import com.example.mokumokusolo.ui.editItem.EditItemScreen
+import com.example.mokumokusolo.ui.editItem.EditItemViewModel
 import com.example.mokumokusolo.ui.home.HomeScreen
 import org.koin.compose.viewmodel.koinViewModel
+import org.koin.core.parameter.parametersOf
 
 @Composable
 fun MainScreen(
@@ -59,6 +63,7 @@ fun MainScreen(
                     val selected = when (item.destination) {
                         AppDestination.Home -> currentDestination?.hierarchy?.any { it.hasRoute<AppDestination.Home>() } == true
                         AppDestination.Calendar -> currentDestination?.hierarchy?.any { it.hasRoute<AppDestination.Calendar>() } == true
+                        else -> false
                     }
 
                     NavigationBarItem(
@@ -82,6 +87,8 @@ fun MainScreen(
                                     AppDestination.Calendar,
                                     options
                                 )
+
+                                else -> {}
                             }
                         },
                         icon = { Icon(item.icon, contentDescription = item.label) },
@@ -106,12 +113,43 @@ fun MainScreen(
                 HomeScreen(
                     apps = apps,
                     expenditures = expenditures,
+                    onAppClick = { app ->
+                        app.id?.let { id ->
+                            navController.navigate(
+                                AppDestination.EditItem(itemId = id, itemType = "app")
+                            )
+                        }
+                    },
+                    onExpenditureClick = { expenditure ->
+                        expenditure.id?.let { id ->
+                            navController.navigate(
+                                AppDestination.EditItem(itemId = id, itemType = "expenditure")
+                            )
+                        }
+                    },
                     modifier = Modifier.padding(vertical = 16.dp, horizontal = 8.dp)
                 )
             }
             composable<AppDestination.Calendar> {
                 // Placeholder for Calendar Screen
                 Text("Calendar Screen")
+            }
+            composable<AppDestination.EditItem> { backStackEntry ->
+                val editItemDestination = backStackEntry.toRoute<AppDestination.EditItem>()
+                val editItemViewModel: EditItemViewModel = koinViewModel(
+                    parameters = {
+                        parametersOf(
+                            editItemDestination.itemId,
+                            editItemDestination.itemType
+                        )
+                    }
+                )
+                EditItemScreen(
+                    viewModel = editItemViewModel,
+                    onNavigateBack = {
+                        navController.popBackStack()
+                    }
+                )
             }
         }
 

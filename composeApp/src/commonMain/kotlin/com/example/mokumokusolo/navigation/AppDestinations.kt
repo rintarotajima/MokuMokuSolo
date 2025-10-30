@@ -12,6 +12,9 @@ sealed interface AppDestination {
 
     @Serializable
     data object Calendar : AppDestination
+
+    @Serializable
+    data class EditItem(val itemId: Int, val itemType: String) : AppDestination
 }
 
 data class BottomNavItem(

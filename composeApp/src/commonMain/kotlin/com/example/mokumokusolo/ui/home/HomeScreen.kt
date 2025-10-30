@@ -22,6 +22,8 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun HomeScreen(
     apps: List<App> = emptyList(),
     expenditures: List<Expenditure> = emptyList(),
+    onAppClick: (App) -> Unit = {},
+    onExpenditureClick: (Expenditure) -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     var selectedChip by remember { mutableStateOf("all") }
@@ -57,19 +59,23 @@ fun HomeScreen(
             "all" -> {
                 AppList(
                     appList = apps,
+                    onAppClick = onAppClick,
                     modifier = Modifier.width(300.dp)
                 )
                 ExpenditureList(
                     expenditureList = expenditures,
+                    onExpenditureClick = onExpenditureClick,
                 )
             }
 
             "apps" -> AppList(
                 appList = apps,
+                onAppClick = onAppClick,
             )
 
             "expenditure" -> ExpenditureList(
                 expenditureList = expenditures,
+                onExpenditureClick = onExpenditureClick,
             )
         }
     }
