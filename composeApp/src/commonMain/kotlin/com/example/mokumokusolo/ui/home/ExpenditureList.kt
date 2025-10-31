@@ -26,13 +26,17 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun ExpenditureList(
     expenditureList: List<Expenditure>,
+    onExpenditureClick: (Expenditure) -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
         modifier = modifier
     ) {
         items(expenditureList) { expenditure ->
-            ExpenditureListItem(expenditure)
+            ExpenditureListItem(
+                expenditure = expenditure,
+                onClick = { onExpenditureClick(expenditure) }
+            )
         }
     }
 }
@@ -67,9 +71,11 @@ fun ExpenditureListPreview() {
 @Composable
 fun ExpenditureListItem(
     expenditure: com.example.mokumokusolo.data.database.entity.Expenditure,
+    onClick: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     ElevatedCard(
+        onClick = onClick,
         modifier = modifier
             .width(300.dp)
             .padding(vertical = 8.dp),

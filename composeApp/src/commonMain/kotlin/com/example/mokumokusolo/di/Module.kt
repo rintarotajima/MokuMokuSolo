@@ -5,6 +5,8 @@ import com.example.mokumokusolo.data.repository.AppRepository
 import com.example.mokumokusolo.data.repository.AppRepositoryImpl
 import com.example.mokumokusolo.data.repository.ExpenditureRepository
 import com.example.mokumokusolo.data.repository.ExpenditureRepositoryImpl
+import com.example.mokumokusolo.model.ItemType
+import com.example.mokumokusolo.ui.editItem.EditItemViewModel
 import com.example.mokumokusolo.ui.main.MainViewModel
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.viewModel
@@ -20,5 +22,9 @@ fun commonAppModule(): Module = module {
     single<ExpenditureRepository> { ExpenditureRepositoryImpl(get()) }
 
     viewModel { MainViewModel(get(), get()) }
+
+    viewModel { (itemId: Int, itemType: ItemType) ->
+        EditItemViewModel(get(), get(), itemId, itemType)
+    }
 
 }

@@ -26,13 +26,17 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun AppList(
     appList: List<App>,
+    onAppClick: (App) -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
         modifier = modifier
     ) {
         items(appList) { app ->
-            AppListItem(app)
+            AppListItem(
+                app = app,
+                onClick = { onAppClick(app) }
+            )
         }
     }
 }
@@ -68,9 +72,11 @@ private fun AppListPreview() {
 @Composable
 fun AppListItem(
     app: App,
+    onClick: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     ElevatedCard(
+        onClick = onClick,
         modifier = modifier
             .width(300.dp)
             .padding(vertical = 8.dp),
