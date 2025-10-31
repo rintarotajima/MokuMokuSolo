@@ -6,13 +6,14 @@ import com.example.mokumokusolo.data.database.entity.App
 import com.example.mokumokusolo.data.database.entity.Expenditure
 import com.example.mokumokusolo.data.repository.AppRepository
 import com.example.mokumokusolo.data.repository.ExpenditureRepository
+import com.example.mokumokusolo.model.ItemType
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
 
 data class EditItemUiState(
-    val itemType: String = "", // "app" or "expenditure"
+    val itemType: ItemType = ItemType.App,
     val name: String = "",
     val amount: String = "",
     val isLoading: Boolean = true,
@@ -23,7 +24,7 @@ class EditItemViewModel(
     private val appRepository: AppRepository,
     private val expenditureRepository: ExpenditureRepository,
     private val itemId: Int,
-    private val itemType: String
+    private val itemType: ItemType
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(EditItemUiState(itemType = itemType))
@@ -38,7 +39,7 @@ class EditItemViewModel(
             _uiState.value = _uiState.value.copy(isLoading = true)
 
             when (itemType) {
-                "app" -> {
+                ItemType.App -> {
                     val app = appRepository.getAppById(itemId).firstOrNull()
                     app?.let {
                         _uiState.value = EditItemUiState(
@@ -50,7 +51,8 @@ class EditItemViewModel(
                         )
                     }
                 }
-                "expenditure" -> {
+
+                ItemType.Expenditure -> {
                     val expenditure = expenditureRepository.getExpenditureById(itemId).firstOrNull()
                     expenditure?.let {
                         _uiState.value = EditItemUiState(
@@ -80,7 +82,7 @@ class EditItemViewModel(
             val id = state.itemId ?: return@launch
 
             when (state.itemType) {
-                "app" -> {
+                ItemType.App -> {
                     val app = App(
                         id = id,
                         name = state.name,
@@ -88,7 +90,8 @@ class EditItemViewModel(
                     )
                     appRepository.updateApp(app)
                 }
-                "expenditure" -> {
+
+                ItemType.Expenditure -> {
                     val expenditure = Expenditure(
                         id = id,
                         name = state.name,
@@ -107,7 +110,7 @@ class EditItemViewModel(
             val id = state.itemId ?: return@launch
 
             when (state.itemType) {
-                "app" -> {
+                ItemType.App -> {
                     val app = App(
                         id = id,
                         name = state.name,
@@ -115,7 +118,8 @@ class EditItemViewModel(
                     )
                     appRepository.deleteApp(app)
                 }
-                "expenditure" -> {
+
+                ItemType.Expenditure -> {
                     val expenditure = Expenditure(
                         id = id,
                         name = state.name,

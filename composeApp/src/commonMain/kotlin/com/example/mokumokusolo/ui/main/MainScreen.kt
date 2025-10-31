@@ -30,6 +30,7 @@ import androidx.navigation.navOptions
 import androidx.navigation.toRoute
 import com.example.mokumokusolo.data.database.entity.App
 import com.example.mokumokusolo.data.database.entity.Expenditure
+import com.example.mokumokusolo.model.ItemType
 import com.example.mokumokusolo.navigation.AppDestination
 import com.example.mokumokusolo.navigation.bottomNavItems
 import com.example.mokumokusolo.ui.addItem.AddItemScreen
@@ -116,14 +117,17 @@ fun MainScreen(
                     onAppClick = { app ->
                         app.id?.let { id ->
                             navController.navigate(
-                                AppDestination.EditItem(itemId = id, itemType = "app")
+                                AppDestination.EditItem(itemId = id, itemType = ItemType.App)
                             )
                         }
                     },
                     onExpenditureClick = { expenditure ->
                         expenditure.id?.let { id ->
                             navController.navigate(
-                                AppDestination.EditItem(itemId = id, itemType = "expenditure")
+                                AppDestination.EditItem(
+                                    itemId = id,
+                                    itemType = ItemType.Expenditure
+                                )
                             )
                         }
                     },

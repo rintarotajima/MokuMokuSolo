@@ -28,6 +28,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.example.mokumokusolo.model.ItemType
 import com.example.mokumokusolo.ui.addItem.AddItemTextField
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -87,12 +88,12 @@ fun EditItemScreen(
                     onValueChange = { viewModel.updateName(it) },
                     label = {
                         Text(
-                            text = if (uiState.itemType == "app") "アプリ名" else "サービス名"
+                            text = if (uiState.itemType == ItemType.App) "アプリ名" else "サービス名"
                         )
                     },
                     placeholder = {
                         Text(
-                            text = if (uiState.itemType == "app") "MokuMokuSolo" else "Netflix"
+                            text = if (uiState.itemType == ItemType.App) "MokuMokuSolo" else "Netflix"
                         )
                     },
                     modifier = Modifier.fillMaxWidth()
@@ -103,7 +104,7 @@ fun EditItemScreen(
                     onValueChange = { viewModel.updateAmount(it) },
                     label = {
                         Text(
-                            text = if (uiState.itemType == "app") "現在の収益(月)" else "現在の支出(月)"
+                            text = if (uiState.itemType == ItemType.App) "現在の収益(月)" else "現在の支出(月)"
                         )
                     },
                     placeholder = { Text(text = "¥1,000") },
