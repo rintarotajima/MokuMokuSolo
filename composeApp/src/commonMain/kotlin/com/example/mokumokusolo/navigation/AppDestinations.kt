@@ -4,7 +4,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.ui.graphics.vector.ImageVector
-import com.example.mokumokusolo.model.ItemType
 import kotlinx.serialization.Serializable
 
 sealed interface AppDestination {
@@ -15,7 +14,7 @@ sealed interface AppDestination {
     data object Calendar : AppDestination
 
     @Serializable
-    data class EditItem(val itemId: Int, val itemType: ItemType) : AppDestination
+    data class EditItem(val itemId: Int, val itemTypeString: String) : AppDestination
 }
 
 data class BottomNavItem(
