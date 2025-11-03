@@ -31,8 +31,8 @@ import androidx.navigation.toRoute
 import com.example.mokumokusolo.data.database.entity.App
 import com.example.mokumokusolo.data.database.entity.Expenditure
 import com.example.mokumokusolo.model.ItemType
-import com.example.mokumokusolo.model.ItemType.Companion.fromNavigationString
-import com.example.mokumokusolo.model.ItemType.Companion.toNavigationString
+import com.example.mokumokusolo.model.toItemType
+import com.example.mokumokusolo.model.toNavigationString
 import com.example.mokumokusolo.navigation.AppDestination
 import com.example.mokumokusolo.navigation.bottomNavItems
 import com.example.mokumokusolo.ui.addItem.AddItemScreen
@@ -142,7 +142,7 @@ fun MainScreen(
             }
             composable<AppDestination.EditItem> { backStackEntry ->
                 val editItemDestination = backStackEntry.toRoute<AppDestination.EditItem>()
-                val itemType = fromNavigationString(editItemDestination.itemTypeString)
+                val itemType = editItemDestination.itemTypeString.toItemType()
                 val editItemViewModel: EditItemViewModel = koinViewModel(
                     parameters = {
                         parametersOf(
