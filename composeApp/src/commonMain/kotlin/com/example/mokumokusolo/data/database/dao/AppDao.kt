@@ -20,6 +20,9 @@ interface AppDao {
     @Delete
     suspend fun delete(app: App)
 
+    @Query("DELETE FROM apps WHERE id = :id")
+    suspend fun deleteById(id: Int)
+
     @Query("SELECT * FROM apps")
     fun getAllApps(): Flow<List<App>>
 

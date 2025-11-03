@@ -7,6 +7,7 @@ interface ExpenditureRepository {
     suspend fun insertExpenditure(expenditure: Expenditure)
     suspend fun updateExpenditure(expenditure: Expenditure)
     suspend fun deleteExpenditure(expenditure: Expenditure)
+    suspend fun deleteExpenditureById(id: Int)
     fun getAllExpenditures(): Flow<List<Expenditure>>
     fun getExpenditureById(id: Int): Flow<Expenditure?>
 }

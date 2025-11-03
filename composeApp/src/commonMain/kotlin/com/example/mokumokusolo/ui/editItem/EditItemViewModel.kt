@@ -106,27 +106,11 @@ class EditItemViewModel(
 
     fun deleteItem(onSuccess: () -> Unit) {
         viewModelScope.launch {
-            val state = _uiState.value
-            val id = state.itemId ?: return@launch
+            val id = _uiState.value.itemId ?: return@launch
 
-            when (state.itemType) {
-                ItemType.App -> {
-                    val app = App(
-                        id = id,
-                        name = state.name,
-                        amount = state.amount.toLongOrNull() ?: 0L
-                    )
-                    appRepository.deleteApp(app)
-                }
-
-                ItemType.Expenditure -> {
-                    val expenditure = Expenditure(
-                        id = id,
-                        name = state.name,
-                        amount = state.amount.toLongOrNull() ?: 0L
-                    )
-                    expenditureRepository.deleteExpenditure(expenditure)
-                }
+            when (_uiState.value.itemType) {
+                ItemType.App -> appRepository.deleteAppById(id)
+                ItemType.Expenditure -> expenditureRepository.deleteExpenditureById(id)
             }
             onSuccess()
         }
