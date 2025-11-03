@@ -7,6 +7,7 @@ interface AppRepository {
     suspend fun insertApp(app: App)
     suspend fun updateApp(app: App)
     suspend fun deleteApp(app: App)
+    suspend fun deleteAppById(id: Int)
     fun getAllApps(): Flow<List<App>>
     fun getAppById(id: Int): Flow<App?>
 }

@@ -17,6 +17,10 @@ class AppRepositoryImpl(private val appDao: AppDao) : AppRepository {
         appDao.delete(app)
     }
 
+    override suspend fun deleteAppById(id: Int) {
+        appDao.deleteById(id)
+    }
+
     override fun getAllApps(): Flow<List<App>> {
         return appDao.getAllApps()
     }

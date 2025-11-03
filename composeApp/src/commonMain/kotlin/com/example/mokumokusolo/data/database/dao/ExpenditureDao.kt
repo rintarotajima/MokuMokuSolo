@@ -20,6 +20,9 @@ interface ExpenditureDao {
     @Delete
     suspend fun delete(expenditure: Expenditure)
 
+    @Query("DELETE FROM expenditures WHERE id = :id")
+    suspend fun deleteById(id: Int)
+
     @Query("SELECT * FROM expenditures")
     fun getAllExpenditures(): Flow<List<Expenditure>>
 

@@ -18,6 +18,10 @@ class ExpenditureRepositoryImpl(private val expenditureDao: ExpenditureDao) :
         expenditureDao.delete(expenditure)
     }
 
+    override suspend fun deleteExpenditureById(id: Int) {
+        expenditureDao.deleteById(id)
+    }
+
     override fun getAllExpenditures(): Flow<List<Expenditure>> {
         return expenditureDao.getAllExpenditures()
     }
