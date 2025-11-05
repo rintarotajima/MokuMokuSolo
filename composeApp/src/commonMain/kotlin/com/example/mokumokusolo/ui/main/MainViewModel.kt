@@ -6,6 +6,7 @@ import com.example.mokumokusolo.data.database.entity.App
 import com.example.mokumokusolo.data.database.entity.Expenditure
 import com.example.mokumokusolo.data.repository.AppRepository
 import com.example.mokumokusolo.data.repository.ExpenditureRepository
+import com.example.mokumokusolo.util.DateUtils
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
@@ -16,14 +17,17 @@ class MainViewModel(
     private val appRepository: AppRepository,
     private val expenditureRepository: ExpenditureRepository
 ) : ViewModel() {
-    val apps: StateFlow<List<App>> = appRepository.getAllApps()
+    private val startOfMonth = DateUtils.getStartOfCurrentMonth()
+    private val startOfNextMonth = DateUtils.getStartOfNextMonth()
+
+    val apps: StateFlow<List<App>> = appRepository.getAppsForMonth(startOfMonth, startOfNextMonth)
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5000),
             initialValue = emptyList()
         )
 
-    val expenditures: StateFlow<List<Expenditure>> = expenditureRepository.getAllExpenditures()
+    val expenditures: StateFlow<List<Expenditure>> = expenditureRepository.getExpendituresForMonth(startOfMonth, startOfNextMonth)
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5000),

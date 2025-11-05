@@ -49,17 +49,20 @@ fun ExpenditureListPreview() {
             com.example.mokumokusolo.data.database.entity.Expenditure(
                 id = 1,
                 name = "Netflix",
-                amount = 780
+                amount = 780,
+                date = 0L
             ),
             com.example.mokumokusolo.data.database.entity.Expenditure(
                 id = 2,
                 name = "Spotify",
-                amount = 980
+                amount = 980,
+                date = 0L
             ),
             com.example.mokumokusolo.data.database.entity.Expenditure(
                 id = 3,
                 name = "Amazon Prime",
-                amount = 500
+                amount = 500,
+                date = 0L
             )
         )
         ExpenditureList(
@@ -116,7 +119,8 @@ private fun ExpenditureListItemPreview() {
             expenditure = com.example.mokumokusolo.data.database.entity.Expenditure(
                 id = 1,
                 name = "Netflix",
-                amount = 780
+                amount = 780,
+                date = 0L
             )
         )
     }

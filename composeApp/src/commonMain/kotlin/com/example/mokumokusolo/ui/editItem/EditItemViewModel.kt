@@ -17,7 +17,8 @@ data class EditItemUiState(
     val name: String = "",
     val amount: String = "",
     val isLoading: Boolean = true,
-    val itemId: Int? = null
+    val itemId: Int? = null,
+    val date: Long = 0L
 )
 
 class EditItemViewModel(
@@ -47,7 +48,8 @@ class EditItemViewModel(
                             name = it.name,
                             amount = it.amount.toString(),
                             isLoading = false,
-                            itemId = it.id
+                            itemId = it.id,
+                            date = it.date
                         )
                     }
                 }
@@ -60,7 +62,8 @@ class EditItemViewModel(
                             name = it.name,
                             amount = it.amount.toString(),
                             isLoading = false,
-                            itemId = it.id
+                            itemId = it.id,
+                            date = it.date
                         )
                     }
                 }
@@ -86,7 +89,8 @@ class EditItemViewModel(
                     val app = App(
                         id = id,
                         name = state.name,
-                        amount = state.amount.toLongOrNull() ?: 0L
+                        amount = state.amount.toLongOrNull() ?: 0L,
+                        date = state.date
                     )
                     appRepository.updateApp(app)
                 }
@@ -95,7 +99,8 @@ class EditItemViewModel(
                     val expenditure = Expenditure(
                         id = id,
                         name = state.name,
-                        amount = state.amount.toLongOrNull() ?: 0L
+                        amount = state.amount.toLongOrNull() ?: 0L,
+                        date = state.date
                     )
                     expenditureRepository.updateExpenditure(expenditure)
                 }

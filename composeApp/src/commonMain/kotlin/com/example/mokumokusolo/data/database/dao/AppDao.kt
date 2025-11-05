@@ -28,4 +28,7 @@ interface AppDao {
 
     @Query("SELECT * FROM apps WHERE id = :id")
     fun getAppById(id: Int): Flow<App?>
+
+    @Query("SELECT * FROM apps WHERE date >= :startOfMonth AND date < :startOfNextMonth")
+    fun getAppsForMonth(startOfMonth: Long, startOfNextMonth: Long): Flow<List<App>>
 }

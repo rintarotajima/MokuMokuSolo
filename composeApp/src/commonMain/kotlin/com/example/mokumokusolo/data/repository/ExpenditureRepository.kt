@@ -10,4 +10,5 @@ interface ExpenditureRepository {
     suspend fun deleteExpenditureById(id: Int)
     fun getAllExpenditures(): Flow<List<Expenditure>>
     fun getExpenditureById(id: Int): Flow<Expenditure?>
+    fun getExpendituresForMonth(startOfMonth: Long, startOfNextMonth: Long): Flow<List<Expenditure>>
 }

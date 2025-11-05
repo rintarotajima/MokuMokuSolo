@@ -91,6 +91,7 @@ fun HomeScreenPreview() {
                 id = 1,
                 name = "Twitter",
                 amount = 120,
+                date = 0L
             )
         ),
         expenditures = listOf(
@@ -98,6 +99,7 @@ fun HomeScreenPreview() {
                 id = 1,
                 name = "Netflix",
                 amount = 1500,
+                date = 0L
             )
         )
     )

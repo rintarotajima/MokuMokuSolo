@@ -29,4 +29,8 @@ class ExpenditureRepositoryImpl(private val expenditureDao: ExpenditureDao) :
     override fun getExpenditureById(id: Int): Flow<Expenditure?> {
         return expenditureDao.getExpenditureById(id)
     }
+
+    override fun getExpendituresForMonth(startOfMonth: Long, startOfNextMonth: Long): Flow<List<Expenditure>> {
+        return expenditureDao.getExpendituresForMonth(startOfMonth, startOfNextMonth)
+    }
 }
