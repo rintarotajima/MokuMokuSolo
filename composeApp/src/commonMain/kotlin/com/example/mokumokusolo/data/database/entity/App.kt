@@ -8,4 +8,5 @@ data class App(
     @PrimaryKey(autoGenerate = true) val id: Int?,
     val name: String,
     val amount: Long,
+    val date: Long,
 )

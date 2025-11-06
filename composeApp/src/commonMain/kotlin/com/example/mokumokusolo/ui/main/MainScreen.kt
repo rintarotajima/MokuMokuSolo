@@ -39,6 +39,7 @@ import com.example.mokumokusolo.ui.addItem.AddItemScreen
 import com.example.mokumokusolo.ui.editItem.EditItemScreen
 import com.example.mokumokusolo.ui.editItem.EditItemViewModel
 import com.example.mokumokusolo.ui.home.HomeScreen
+import com.example.mokumokusolo.util.DateUtils
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.parametersOf
 
@@ -168,14 +169,16 @@ fun MainScreen(
                         val newApp = App(
                             id = 0,
                             name = name,
-                            amount = amount.toLong()
+                            amount = amount.toLong(),
+                            date = DateUtils.getCurrentDateMillis()
                         )
                         viewModel.addApp(newApp)
                     } else {
                         val newExpenditure = Expenditure(
                             id = 0,
                             name = name,
-                            amount = amount.toLong()
+                            amount = amount.toLong(),
+                            date = DateUtils.getCurrentDateMillis()
                         )
                         viewModel.addExpenditure(newExpenditure)
                     }

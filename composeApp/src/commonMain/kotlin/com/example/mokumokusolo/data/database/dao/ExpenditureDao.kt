@@ -28,4 +28,7 @@ interface ExpenditureDao {
 
     @Query("SELECT * FROM expenditures WHERE id = :id")
     fun getExpenditureById(id: Int): Flow<Expenditure?>
+
+    @Query("SELECT * FROM expenditures WHERE date >= :startOfMonth AND date < :startOfNextMonth")
+    fun getExpendituresForMonth(startOfMonth: Long, startOfNextMonth: Long): Flow<List<Expenditure>>
 }

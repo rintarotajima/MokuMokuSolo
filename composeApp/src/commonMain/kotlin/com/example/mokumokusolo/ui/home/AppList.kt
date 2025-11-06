@@ -49,17 +49,20 @@ private fun AppListPreview() {
             App(
                 id = 1,
                 name = "Duolingo",
-                amount = 1000
+                amount = 1000,
+                date = 0L
             ),
             App(
                 id = 2,
                 name = "Spotify",
-                amount = 1500
+                amount = 1500,
+                date = 0L
             ),
             App(
                 id = 3,
                 name = "Netflix",
-                amount = 2000
+                amount = 2000,
+                date = 0L
             )
         )
         AppList(
@@ -117,7 +120,8 @@ fun AppListItemPreview() {
             app = App(
                 id = 1,
                 name = "Duolingo",
-                amount = 1000
+                amount = 1000,
+                date = 0L
             )
         )
     }

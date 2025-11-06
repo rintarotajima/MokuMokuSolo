@@ -28,4 +28,8 @@ class AppRepositoryImpl(private val appDao: AppDao) : AppRepository {
     override fun getAppById(id: Int): Flow<App?> {
         return appDao.getAppById(id)
     }
+
+    override fun getAppsForMonth(startOfMonth: Long, startOfNextMonth: Long): Flow<List<App>> {
+        return appDao.getAppsForMonth(startOfMonth, startOfNextMonth)
+    }
 }
