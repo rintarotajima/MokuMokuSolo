@@ -76,7 +76,7 @@ fun MainScreen(
             if (shouldShowTopBar) {
                 TopAppBar(
                     title = { },
-                    actions = {
+                    navigationIcon = {
                         IconButton(onClick = {
                             navController.navigate(AppDestination.Settings)
                         }) {
@@ -136,10 +136,11 @@ fun MainScreen(
                 Icon(Icons.Default.Add, "")
             }
         }
-    ) {
+    ) { paddingValues ->
         NavHost(
             navController = navController,
-            startDestination = AppDestination.Home
+            startDestination = AppDestination.Home,
+            modifier = Modifier.padding(paddingValues)
         ) {
             composable<AppDestination.Home> {
                 HomeScreen(
@@ -165,7 +166,7 @@ fun MainScreen(
                             )
                         }
                     },
-                    modifier = Modifier.padding(vertical = 16.dp, horizontal = 8.dp)
+                    modifier = Modifier.padding(horizontal = 8.dp)
                 )
             }
             composable<AppDestination.Calendar> {
