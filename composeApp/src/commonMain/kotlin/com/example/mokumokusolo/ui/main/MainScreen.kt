@@ -5,13 +5,17 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -39,10 +43,12 @@ import com.example.mokumokusolo.ui.addItem.AddItemScreen
 import com.example.mokumokusolo.ui.editItem.EditItemScreen
 import com.example.mokumokusolo.ui.editItem.EditItemViewModel
 import com.example.mokumokusolo.ui.home.HomeScreen
+import com.example.mokumokusolo.ui.settings.SettingsScreen
 import com.example.mokumokusolo.util.DateUtils
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.parametersOf
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(
     modifier: Modifier = Modifier,
@@ -61,6 +67,28 @@ fun MainScreen(
         modifier = modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background),
+        topBar = {
+            // Only show top bar on Home and Calendar screens
+            val shouldShowTopBar = currentDestination?.hierarchy?.any {
+                it.hasRoute<AppDestination.Home>() || it.hasRoute<AppDestination.Calendar>()
+            } == true
+
+            if (shouldShowTopBar) {
+                TopAppBar(
+                    title = { },
+                    actions = {
+                        IconButton(onClick = {
+                            navController.navigate(AppDestination.Settings)
+                        }) {
+                            Icon(
+                                imageVector = Icons.Default.Settings,
+                                contentDescription = "設定"
+                            )
+                        }
+                    }
+                )
+            }
+        },
         bottomBar = {
             NavigationBar {
                 bottomNavItems.forEach { item ->
@@ -120,7 +148,10 @@ fun MainScreen(
                     onAppClick = { app ->
                         app.id?.let { id ->
                             navController.navigate(
-                                AppDestination.EditItem(itemId = id, itemTypeString = ItemType.App.toNavigationString())
+                                AppDestination.EditItem(
+                                    itemId = id,
+                                    itemTypeString = ItemType.App.toNavigationString()
+                                )
                             )
                         }
                     },
@@ -140,6 +171,13 @@ fun MainScreen(
             composable<AppDestination.Calendar> {
                 // Placeholder for Calendar Screen
                 Text("Calendar Screen")
+            }
+            composable<AppDestination.Settings> {
+                SettingsScreen(
+                    onNavigateBack = {
+                        navController.popBackStack()
+                    }
+                )
             }
             composable<AppDestination.EditItem> { backStackEntry ->
                 val editItemDestination = backStackEntry.toRoute<AppDestination.EditItem>()
