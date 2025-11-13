@@ -13,9 +13,12 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.ListItem
+import androidx.compose.material3.ListItemDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.example.mokumokusolo.util.UrlOpener
@@ -40,7 +43,10 @@ fun SettingsScreen(
                             contentDescription = "戻る"
                         )
                     }
-                }
+                },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.background
+                )
             )
         }
     ) { paddingValues ->
@@ -49,7 +55,6 @@ fun SettingsScreen(
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
-            // Terms of Service
             ListItem(
                 headlineContent = { Text("利用規約") },
                 trailingContent = {
@@ -63,11 +68,12 @@ fun SettingsScreen(
                     .clickable {
                         // TODO: Replace with your actual Terms of Service URL
                         urlOpener.openUrl("https://example.com/terms")
-                    }
+                    },
+                colors = ListItemDefaults.colors(
+                    containerColor = MaterialTheme.colorScheme.background
+                )
             )
             HorizontalDivider()
-
-            // Privacy Policy
             ListItem(
                 headlineContent = { Text("プライバシーポリシー") },
                 trailingContent = {
@@ -81,13 +87,14 @@ fun SettingsScreen(
                     .clickable {
                         // TODO: Replace with your actual Privacy Policy URL
                         urlOpener.openUrl("https://slow-blanket-951.notion.site/28e5e2d6531a800bb8f3f44b7bf27ae8")
-                    }
+                    },
+                colors = ListItemDefaults.colors(
+                    containerColor = MaterialTheme.colorScheme.background
+                )
             )
             HorizontalDivider()
-
-            // Developer X (Twitter) Link
             ListItem(
-                headlineContent = { Text("開発者のXアカウント") },
+                headlineContent = { Text("開発者(Xアカウント)") },
                 trailingContent = {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
@@ -99,7 +106,10 @@ fun SettingsScreen(
                     .clickable {
                         // TODO: Replace with your actual X (Twitter) profile URL
                         urlOpener.openUrl("https://x.com/rinta________")
-                    }
+                    },
+                colors = ListItemDefaults.colors(
+                    containerColor = MaterialTheme.colorScheme.background
+                )
             )
             HorizontalDivider()
         }

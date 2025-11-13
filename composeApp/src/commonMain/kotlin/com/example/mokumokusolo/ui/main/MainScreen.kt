@@ -19,6 +19,7 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -76,10 +77,10 @@ fun MainScreen(
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background),
         topBar = {
-            // Only show top bar on Home and Calendar screens
+            // Only show top bar on Home and Calendar screens, and hide when AddItemScreen is shown
             val shouldShowTopBar = currentDestination?.hierarchy?.any {
                 it.hasRoute<AppDestination.Home>() || it.hasRoute<AppDestination.Calendar>()
-            } == true
+            } == true && !showAddItemScreen
 
             if (shouldShowTopBar) {
                 TopAppBar(
@@ -93,7 +94,10 @@ fun MainScreen(
                                 contentDescription = "設定"
                             )
                         }
-                    }
+                    },
+                    colors = TopAppBarDefaults.topAppBarColors(
+                        containerColor = MaterialTheme.colorScheme.background
+                    )
                 )
             }
         },
