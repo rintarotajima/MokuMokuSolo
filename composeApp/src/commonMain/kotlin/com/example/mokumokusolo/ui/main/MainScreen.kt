@@ -232,13 +232,6 @@ fun MainScreen(
                             viewModel.addExpenditure(newExpenditure)
                         }
                         showAddItemScreen = false
-                    } catch (e: NumberFormatException) {
-                        scope.launch {
-                            snackbarHostState.showSnackbar(
-                                message = "金額は数値で入力してください。",
-                                duration = SnackbarDuration.Short
-                            )
-                        }
                     } catch (e: Exception) {
                         scope.launch {
                             snackbarHostState.showSnackbar(
