@@ -14,6 +14,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
@@ -21,6 +24,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -45,6 +49,7 @@ import com.example.mokumokusolo.ui.editItem.EditItemViewModel
 import com.example.mokumokusolo.ui.home.HomeScreen
 import com.example.mokumokusolo.ui.settings.SettingsScreen
 import com.example.mokumokusolo.util.DateUtils
+import kotlinx.coroutines.launch
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.parametersOf
 
@@ -62,6 +67,9 @@ fun MainScreen(
     val expenditures by viewModel.expenditures.collectAsState()
 
     var showAddItemScreen by remember { mutableStateOf(false) }
+
+    val snackbarHostState = remember { SnackbarHostState() }
+    val scope = rememberCoroutineScope()
 
     Scaffold(
         modifier = modifier
@@ -135,7 +143,8 @@ fun MainScreen(
             ) {
                 Icon(Icons.Default.Add, "")
             }
-        }
+        },
+        snackbarHost = { SnackbarHost(snackbarHostState) }
     ) { paddingValues ->
         NavHost(
             navController = navController,
@@ -204,24 +213,33 @@ fun MainScreen(
             AddItemScreen(
                 onClose = { showAddItemScreen = false },
                 onAddItem = { isIncome, name, amount ->
-                    if (isIncome) {
-                        val newApp = App(
-                            id = 0,
-                            name = name,
-                            amount = amount.toLong(),
-                            date = DateUtils.getCurrentDateMillis()
-                        )
-                        viewModel.addApp(newApp)
-                    } else {
-                        val newExpenditure = Expenditure(
-                            id = 0,
-                            name = name,
-                            amount = amount.toLong(),
-                            date = DateUtils.getCurrentDateMillis()
-                        )
-                        viewModel.addExpenditure(newExpenditure)
+                    try {
+                        if (isIncome) {
+                            val newApp = App(
+                                id = 0,
+                                name = name,
+                                amount = amount.toLong(),
+                                date = DateUtils.getCurrentDateMillis()
+                            )
+                            viewModel.addApp(newApp)
+                        } else {
+                            val newExpenditure = Expenditure(
+                                id = 0,
+                                name = name,
+                                amount = amount.toLong(),
+                                date = DateUtils.getCurrentDateMillis()
+                            )
+                            viewModel.addExpenditure(newExpenditure)
+                        }
+                        showAddItemScreen = false
+                    } catch (e: Exception) {
+                        scope.launch {
+                            snackbarHostState.showSnackbar(
+                                message = "データの追加に失敗しました。",
+                                duration = SnackbarDuration.Short
+                            )
+                        }
                     }
-                    showAddItemScreen = false
                 }
             )
         }
