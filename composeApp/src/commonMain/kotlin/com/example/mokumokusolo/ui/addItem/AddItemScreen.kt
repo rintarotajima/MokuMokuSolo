@@ -90,7 +90,8 @@ fun AddItemScreen(
                         viewModel.updateIncomeAmount(newIncomeAmount)
                     },
                     label = { Text(text = "現在の収益(月)") },
-                    placeholder = { Text(text = "¥1,000") }
+                    placeholder = { Text(text = "¥1,000") },
+                    isNumericInput = true
                 )
             } else {
                 AddItemTextField(
@@ -108,20 +109,26 @@ fun AddItemScreen(
                         viewModel.updateExpenseAmount(newExpenseAmount)
                     },
                     label = { Text(text = "現在の支出(月)") },
-                    placeholder = { Text(text = "¥1,000") }
+                    placeholder = { Text(text = "¥1,000") },
+                    isNumericInput = true
                 )
             }
             Spacer(modifier = Modifier.padding(8.dp))
-            Button(onClick = {
-                val isIncome = addItemFormState.selectedIndex == 0
-                val name =
-                    if (isIncome) addItemFormState.incomeData.name else addItemFormState.expenseData.name
-                val amount =
-                    if (isIncome) addItemFormState.incomeData.amount else addItemFormState.expenseData.amount
-                onAddItem?.invoke(isIncome, name, amount)
-                viewModel.resetForm()
-                onClose()
-            }) {
+
+            val isIncome = addItemFormState.selectedIndex == 0
+            val name =
+                if (isIncome) addItemFormState.incomeData.name else addItemFormState.expenseData.name
+            val amount =
+                if (isIncome) addItemFormState.incomeData.amount else addItemFormState.expenseData.amount
+            val isValid = name.isNotBlank() && amount.isNotBlank() && amount.toLongOrNull() != null
+            Button(
+                onClick = {
+                    onAddItem?.invoke(isIncome, name, amount)
+                    viewModel.resetForm()
+                    onClose()
+                },
+                enabled = isValid
+            ) {
                 Text("登録")
             }
         }
