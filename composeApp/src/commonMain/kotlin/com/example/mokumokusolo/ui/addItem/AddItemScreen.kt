@@ -81,7 +81,7 @@ fun AddItemScreen(
                         viewModel.updateIncomeName(newIncomeName)
                     },
                     label = { Text(text = "アプリ名") },
-                    placeholder = { Text(text = "MokuMokuSolo") }
+                    placeholder = { Text(text = "Afrel") }
                 )
                 Spacer(modifier = Modifier.padding(8.dp))
                 AddItemTextField(

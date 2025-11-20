@@ -93,7 +93,7 @@ fun EditItemScreen(
                     },
                     placeholder = {
                         Text(
-                            text = if (uiState.itemType == ItemType.App) "MokuMokuSolo" else "Netflix"
+                            text = if (uiState.itemType == ItemType.App) "Afrel" else "Netflix"
                         )
                     },
                     modifier = Modifier.fillMaxWidth()
