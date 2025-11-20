@@ -101,46 +101,46 @@ fun MainScreen(
                 )
             }
         },
-        bottomBar = {
-            NavigationBar {
-                bottomNavItems.forEach { item ->
-                    val selected = when (item.destination) {
-                        AppDestination.Home -> currentDestination?.hierarchy?.any { it.hasRoute<AppDestination.Home>() } == true
-                        AppDestination.Calendar -> currentDestination?.hierarchy?.any { it.hasRoute<AppDestination.Calendar>() } == true
-                        else -> false
-                    }
-
-                    NavigationBarItem(
-                        selected = selected,
-                        onClick = {
-                            val destination = item.destination
-                            val options = navOptions {
-                                popUpTo<AppDestination.Home> {
-                                    saveState = true
-                                }
-                                launchSingleTop = true
-                                restoreState = true
-                            }
-                            when (destination) {
-                                AppDestination.Home -> navController.navigate(
-                                    AppDestination.Home,
-                                    options
-                                )
-
-                                AppDestination.Calendar -> navController.navigate(
-                                    AppDestination.Calendar,
-                                    options
-                                )
-
-                                else -> {}
-                            }
-                        },
-                        icon = { Icon(item.icon, contentDescription = item.label) },
-                        label = { Text(item.label) },
-                    )
-                }
-            }
-        },
+//        bottomBar = {
+//            NavigationBar {
+//                bottomNavItems.forEach { item ->
+//                    val selected = when (item.destination) {
+//                        AppDestination.Home -> currentDestination?.hierarchy?.any { it.hasRoute<AppDestination.Home>() } == true
+//                        AppDestination.Calendar -> currentDestination?.hierarchy?.any { it.hasRoute<AppDestination.Calendar>() } == true
+//                        else -> false
+//                    }
+//
+//                    NavigationBarItem(
+//                        selected = selected,
+//                        onClick = {
+//                            val destination = item.destination
+//                            val options = navOptions {
+//                                popUpTo<AppDestination.Home> {
+//                                    saveState = true
+//                                }
+//                                launchSingleTop = true
+//                                restoreState = true
+//                            }
+//                            when (destination) {
+//                                AppDestination.Home -> navController.navigate(
+//                                    AppDestination.Home,
+//                                    options
+//                                )
+//
+//                                AppDestination.Calendar -> navController.navigate(
+//                                    AppDestination.Calendar,
+//                                    options
+//                                )
+//
+//                                else -> {}
+//                            }
+//                        },
+//                        icon = { Icon(item.icon, contentDescription = item.label) },
+//                        label = { Text(item.label) },
+//                    )
+//                }
+//            }
+//        },
         floatingActionButton = {
             FloatingActionButton(
                 onClick = { showAddItemScreen = true }
