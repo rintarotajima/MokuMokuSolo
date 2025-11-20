@@ -55,24 +55,24 @@ fun SettingsScreen(
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
-            ListItem(
-                headlineContent = { Text("利用規約") },
-                trailingContent = {
-                    Icon(
-                        imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
-                        contentDescription = null
-                    )
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clickable {
-                        // TODO: Replace with your actual Terms of Service URL
-                        urlOpener.openUrl("https://example.com/terms")
-                    },
-                colors = ListItemDefaults.colors(
-                    containerColor = MaterialTheme.colorScheme.background
-                )
-            )
+//            ListItem(
+//                headlineContent = { Text("利用規約") },
+//                trailingContent = {
+//                    Icon(
+//                        imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
+//                        contentDescription = null
+//                    )
+//                },
+//                modifier = Modifier
+//                    .fillMaxWidth()
+//                    .clickable {
+//                        // TODO: Replace with your actual Terms of Service URL
+//                        urlOpener.openUrl("https://example.com/terms")
+//                    },
+//                colors = ListItemDefaults.colors(
+//                    containerColor = MaterialTheme.colorScheme.background
+//                )
+//            )
             HorizontalDivider()
             ListItem(
                 headlineContent = { Text("プライバシーポリシー") },
