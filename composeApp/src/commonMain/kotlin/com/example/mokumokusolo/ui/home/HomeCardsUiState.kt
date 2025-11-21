@@ -5,7 +5,7 @@ import com.example.mokumokusolo.data.database.entity.Expenditure
 
 data class HomeCardsUiState(
     val balance: Int,
-    val targetExpenditure: com.example.mokumokusolo.data.database.entity.Expenditure?,
+    val targetExpenditure: Expenditure?,
     val progressRatio: Float,
     val totalIncome: Long,
     val totalExpenditure: Long,
@@ -23,7 +23,7 @@ fun updateHomeCardsUiState(
     val targetExpenditure = candidates.firstOrNull()
 
     val progressRatio = if (targetExpenditure != null && targetExpenditure.amount > 0) {
-        (totalIncome / targetExpenditure.amount).toFloat().coerceAtMost(1.0f)
+        (totalIncome.toFloat() / targetExpenditure.amount).coerceAtMost(1.0f)
     } else {
         0f
     }
