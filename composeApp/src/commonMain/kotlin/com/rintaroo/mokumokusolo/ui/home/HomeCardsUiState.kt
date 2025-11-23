@@ -23,7 +23,7 @@ fun updateHomeCardsUiState(
     val targetExpenditure = candidates.firstOrNull()
 
     val progressRatio = if (targetExpenditure != null && targetExpenditure.amount > 0) {
-        (totalIncome / targetExpenditure.amount).toFloat().coerceAtMost(1.0f)
+        (totalIncome.toFloat() / targetExpenditure.amount).coerceAtMost(1.0f)
     } else {
         0f
     }
