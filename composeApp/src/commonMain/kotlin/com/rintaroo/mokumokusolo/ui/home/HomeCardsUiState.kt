@@ -5,7 +5,7 @@ import com.rintaroo.mokumokusolo.data.database.entity.Expenditure
 
 data class HomeCardsUiState(
     val balance: Int,
-    val targetExpenditure: com.rintaroo.mokumokusolo.data.database.entity.Expenditure?,
+    val targetExpenditure: Expenditure?,
     val progressRatio: Float,
     val totalIncome: Long,
     val totalExpenditure: Long,
