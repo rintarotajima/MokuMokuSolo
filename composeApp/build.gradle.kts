@@ -81,7 +81,17 @@ android {
     }
     buildTypes {
         getByName("release") {
-            isMinifyEnabled = false
+            // コードの最適化
+            isMinifyEnabled = true
+            // リソースの最適化
+            isShrinkResources = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt")
+            )
+            // シンボルファイル
+            ndk {
+                debugSymbolLevel = "SYMBOL_TABLE"; "FULL"
+            }
         }
     }
     compileOptions {
