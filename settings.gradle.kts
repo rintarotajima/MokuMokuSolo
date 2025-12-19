@@ -1,4 +1,4 @@
-rootProject.name = "MokuMokuSolo"
+rootProject.name = "Afrel"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
