@@ -20,7 +20,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.rintaroo.afrel.data.database.entity.Expenditure
-import com.rintaroo.afrel.ui.theme.MokuMokuSoloTheme
+import com.rintaroo.afrel.ui.theme.AfrelTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
@@ -44,7 +44,7 @@ fun ExpenditureList(
 @Preview
 @Composable
 fun ExpenditureListPreview() {
-    MokuMokuSoloTheme {
+    AfrelTheme {
         val sampleExpenditures = listOf(
             com.rintaroo.afrel.data.database.entity.Expenditure(
                 id = 1,
@@ -114,7 +114,7 @@ fun ExpenditureListItem(
 @Preview
 @Composable
 private fun ExpenditureListItemPreview() {
-    MokuMokuSoloTheme {
+    AfrelTheme {
         ExpenditureListItem(
             expenditure = com.rintaroo.afrel.data.database.entity.Expenditure(
                 id = 1,

@@ -20,7 +20,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.rintaroo.afrel.data.database.entity.App
-import com.rintaroo.afrel.ui.theme.MokuMokuSoloTheme
+import com.rintaroo.afrel.ui.theme.AfrelTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
@@ -44,7 +44,7 @@ fun AppList(
 @Preview
 @Composable
 private fun AppListPreview() {
-    MokuMokuSoloTheme {
+    AfrelTheme {
         val sampleApps = listOf(
             App(
                 id = 1,
@@ -115,7 +115,7 @@ fun AppListItem(
 @Preview
 @Composable
 fun AppListItemPreview() {
-    MokuMokuSoloTheme {
+    AfrelTheme {
         AppListItem(
             app = App(
                 id = 1,

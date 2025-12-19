@@ -26,7 +26,7 @@ val DarkColorTheme = darkColorScheme(
 )
 
 @Composable
-fun MokuMokuSoloTheme(
+fun AfrelTheme(
     content: @Composable () -> Unit
 ) {
     val theme = if (isSystemInDarkTheme()) {

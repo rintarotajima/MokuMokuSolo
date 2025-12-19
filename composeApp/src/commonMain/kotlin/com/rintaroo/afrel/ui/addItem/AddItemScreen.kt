@@ -23,7 +23,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.rintaroo.afrel.ui.theme.MokuMokuSoloTheme
+import com.rintaroo.afrel.ui.theme.AfrelTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 
@@ -138,7 +138,7 @@ fun AddItemScreen(
 @Preview
 @Composable
 fun AddItemScreenPreview() {
-    MokuMokuSoloTheme {
+    AfrelTheme {
         AddItemScreen(onClose = {})
     }
 }

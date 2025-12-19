@@ -17,7 +17,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.rintaroo.afrel.ui.theme.MokuMokuSoloTheme
+import com.rintaroo.afrel.ui.theme.AfrelTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
@@ -84,7 +84,7 @@ fun ExpenditureChip(
 @Preview
 @Composable
 fun ChipsPreview() {
-    MokuMokuSoloTheme {
+    AfrelTheme {
         var selectedChip by remember { mutableStateOf("all") }
         Row(
             horizontalArrangement = Arrangement.SpaceAround,
